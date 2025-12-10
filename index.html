@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Aviator Signal PRO (Mobile/Desktop)</title>
+    <title>Aviator Signal PRO (WhatsApp Renew)</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -13,108 +13,50 @@
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body { margin: 0; padding: 0; font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #120c1f 0%, #2b102f 100%); height: 100vh; display: flex; justify-content: center; align-items: center; color: white; overflow: hidden; }
         
-        /* Background Animations */
         .circle { position: absolute; border-radius: 50%; background: linear-gradient(45deg, #ff0055, #ff00cc); filter: blur(80px); z-index: -1; animation: float 10s infinite ease-in-out; }
         .c1 { width: 300px; height: 300px; top: -50px; left: -50px; opacity: 0.4; }
         .c2 { width: 250px; height: 250px; bottom: -50px; right: -50px; background: #00ccff; opacity: 0.3; animation-delay: 2s; }
         @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(20px); } 100% { transform: translateY(0px); } }
         
-        /* GLASS CARD (Responsive Container) */
-        .glass-card { 
-            background: rgba(255, 255, 255, 0.05); 
-            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); 
-            border: 1px solid rgba(255, 255, 255, 0.1); 
-            padding: 30px; border-radius: 25px; 
-            width: 90%; max-width: 400px; /* Desktop Max Width */
-            text-align: center; 
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5); 
-            max-height: 95vh; overflow-y: auto; 
-            position: relative; z-index: 10;
-        }
-        
-        /* Hide Scrollbar */
+        .glass-card { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); padding: 30px; border-radius: 25px; width: 90%; max-width: 400px; text-align: center; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5); max-height: 95vh; overflow-y: auto; position: relative; z-index: 10; }
         .glass-card::-webkit-scrollbar { width: 0; }
 
-        /* Typography */
         h1 { font-weight: 800; margin: 0 0 5px 0; font-size: 26px; background: linear-gradient(to right, #ff4d6d, #ffcc00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-transform: uppercase; }
         .sub-title { font-size: 11px; color: rgba(255, 255, 255, 0.5); margin-bottom: 25px; letter-spacing: 1px; }
         
-        /* Inputs */
         .input-box { position: relative; margin-bottom: 20px; }
         .input-box label { position: absolute; top: -10px; left: 15px; background: #1e1324; padding: 0 5px; font-size: 10px; color: #ff4d6d; border-radius: 5px; z-index: 10; font-weight: 600; }
         .std-input { width: 100%; background: rgba(0, 0, 0, 0.3); border: 2px solid rgba(255, 255, 255, 0.1); padding: 14px; border-radius: 12px; color: white; font-size: 16px; font-family: 'Poppins', sans-serif; outline: none; transition: 0.3s; text-align: center; }
-        .std-input:focus { border-color: #ff4d6d; box-shadow: 0 0 10px rgba(255, 77, 109, 0.2); }
+        .std-input:focus { border-color: #ff4d6d; }
         
-        /* Buttons */
         .btn-analyze { width: 100%; padding: 15px; background: linear-gradient(90deg, #ff0055, #ff00cc); border: none; border-radius: 15px; color: white; font-size: 16px; font-weight: 700; cursor: pointer; box-shadow: 0 5px 20px rgba(255, 0, 85, 0.4); text-transform: uppercase; margin-top: 10px; transition: transform 0.2s; }
         .btn-analyze:active { transform: scale(0.98); }
-        
         .btn-logout { width: 100%; padding: 12px; background: rgba(255, 0, 0, 0.15); border: 1px solid #ff4d6d; border-radius: 12px; color: white; font-size: 13px; font-weight: 600; cursor: pointer; margin-top: 25px; }
-        .btn-logout:active { background: rgba(255, 0, 0, 0.3); }
-
-        /* Error & Expiry */
+        
         #loginError { color: #ff4d6d; font-size: 12px; margin-top: 15px; display: none; font-weight: bold; background: rgba(255,0,0,0.1); padding: 10px; border-radius: 8px; }
+        
+        /* NEW: WhatsApp Renew Button Style */
+        .btn-renew {
+            display: block; width: 100%; text-decoration: none;
+            background: #25D366; color: #fff; padding: 10px;
+            border-radius: 8px; margin-top: 10px; font-weight: bold;
+            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.02); } 100% { transform: scale(1); } }
+
         .expiry-info { font-size: 11px; color: #00ff88; margin-bottom: 20px; border: 1px solid #00ff88; padding: 6px 12px; border-radius: 20px; background: rgba(0,255,136,0.1); display: inline-block;}
 
-        /* --- NOTICE MODAL STYLES (Responsive) --- */
-        #noticeModal {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.92); /* Darker BG for focus */
-            z-index: 9999;
-            display: none; /* Logic Controls This */
-            justify-content: center; align-items: center;
-            padding: 20px;
-        }
-        
-        .notice-content {
-            background: #151515; 
-            border: 2px solid #9d4edd; /* Purple Border */
-            padding: 30px 20px; 
-            border-radius: 25px; 
-            width: 100%; max-width: 380px;
-            text-align: center; 
-            box-shadow: 0 0 50px rgba(157, 78, 221, 0.3);
-            animation: slideUp 0.4s ease-out;
-            position: relative;
-        }
-        
-        /* Decorative Line */
-        .notice-content::before {
-            content: ''; position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
-            width: 40px; height: 4px; background: #333; border-radius: 2px;
-        }
-
-        .notice-title { 
-            color: #e0aaff; 
-            font-weight: 800; font-size: 18px; 
-            margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding-bottom: 15px;
-        }
-        
-        .notice-text { 
-            font-size: 14px; color: #ccc; line-height: 1.7; 
-            margin-bottom: 25px; text-align: center; font-weight: 400;
-        }
-        
-        .signature {
-            color: #ffcc00; font-weight: 700; margin-top: 15px; 
-            display: block; font-size: 12px; letter-spacing: 0.5px;
-        }
-
-        .btn-notice { 
-            width: 100%; padding: 14px; 
-            background: linear-gradient(135deg, #7b2cbf, #3c096c); 
-            color: white; border: none; border-radius: 12px; 
-            font-weight: bold; cursor: pointer; font-size: 14px; 
-            box-shadow: 0 5px 15px rgba(123, 44, 191, 0.4);
-            transition: transform 0.2s; 
-        }
-        .btn-notice:active { transform: scale(0.95); }
-
+        /* Notice Modal */
+        #noticeModal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.92); z-index: 9999; display: none; justify-content: center; align-items: center; padding: 20px; }
+        .notice-content { background: #151515; border: 2px solid #9d4edd; padding: 30px 20px; border-radius: 25px; width: 100%; max-width: 380px; text-align: center; box-shadow: 0 0 50px rgba(157, 78, 221, 0.3); animation: slideUp 0.4s ease-out; position: relative; }
+        .notice-title { color: #e0aaff; font-weight: 800; font-size: 18px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; }
+        .notice-text { font-size: 14px; color: #ccc; line-height: 1.7; margin-bottom: 25px; text-align: center; font-weight: 400; }
+        .signature { color: #ffcc00; font-weight: 700; margin-top: 15px; display: block; font-size: 12px; letter-spacing: 0.5px; }
+        .btn-notice { width: 100%; padding: 14px; background: linear-gradient(135deg, #7b2cbf, #3c096c); color: white; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; font-size: 14px; box-shadow: 0 5px 15px rgba(123, 44, 191, 0.4); }
         @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
-        /* --- CLOCK UI --- */
+        /* Clock UI */
         .clock-wrapper { display: flex; align-items: stretch; gap: 10px; }
         .clock-container { flex: 2; display: flex; justify-content: center; align-items: center; background: rgba(0, 0, 0, 0.3); border-radius: 15px; padding: 10px; border: 2px solid rgba(255, 255, 255, 0.1); }
         .clock-input { background: transparent; border: none; color: white; font-size: 38px; font-weight: 600; width: 55px; text-align: center; outline: none; font-family: 'Poppins', sans-serif; padding: 0; margin: 0; }
@@ -123,38 +65,20 @@
         .ampm-btn { flex: 1; border: none; background: transparent; color: #aaa; font-weight: bold; cursor: pointer; transition: 0.3s; font-size: 13px; }
         .ampm-btn.active { background: #ff4d6d; color: white; box-shadow: 0 0 15px rgba(255, 77, 109, 0.5); }
         
-        /* Result Area */
         #resultArea { display: none; margin-top: 25px; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 20px; animation: fadeIn 0.5s ease; }
         .result-panel { background: rgba(0, 0, 0, 0.3); border-radius: 15px; padding: 15px; margin-bottom: 10px; border: 1px solid rgba(255, 255, 255, 0.05); }
         .time-display { font-size: 32px; font-weight: 800; color: #00ffcc; text-shadow: 0 0 15px rgba(0, 255, 204, 0.5); margin: 5px 0; }
         .zone-display { font-size: 16px; color: #ffd700; font-weight: 600; }
+        .btn-copy { width: 100%; padding: 12px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 12px; color: white; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; }
         
-        .btn-copy { 
-            width: 100%; padding: 12px; 
-            background: rgba(255, 255, 255, 0.08); 
-            border: 1px solid rgba(255, 255, 255, 0.2); 
-            border-radius: 12px; color: white; font-weight: 600; 
-            cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
-        }
-        
-        /* Social Buttons */
         .social-area { margin-top: 25px; padding-top: 15px; border-top: 1px solid rgba(255, 255, 255, 0.1); display: flex; gap: 10px; justify-content: center; }
         .social-btn { flex: 1; display: flex; align-items: center; justify-content: center; padding: 12px; border-radius: 12px; text-decoration: none; color: white; font-size: 13px; font-weight: 600; transition: 0.3s; border: 1px solid transparent; gap: 8px; }
         .yt { background: rgba(255, 0, 0, 0.2); border-color: rgba(255, 0, 0, 0.4); }
         .wa { background: rgba(0, 255, 136, 0.2); border-color: rgba(0, 255, 136, 0.4); }
-        .social-btn i { font-size: 18px; }
         
         .footer { margin-top: 25px; font-size: 10px; color: rgba(255, 255, 255, 0.3); letter-spacing: 0.5px; }
         
-        /* Mobile Adjustments */
-        @media (max-width: 480px) {
-            h1 { font-size: 22px; }
-            .glass-card { padding: 25px 20px; width: 95%; }
-            .clock-input { font-size: 32px; }
-            .notice-content { padding: 25px 20px; width: 90%; }
-            .notice-text { font-size: 13px; }
-        }
-
+        #mainApp, #noticeModal { display: none; }
         input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
         input[type=number] { -moz-appearance: textfield; }
         @keyframes blink { 50% { opacity: 0; } }
@@ -198,7 +122,7 @@
         <div class="footer">Signal App Powered by Suwahas Sathsara</div>
     </div>
 
-    <div id="mainApp" class="glass-card" style="display: none;">
+    <div id="mainApp" class="glass-card">
         <h1>Aviator AI</h1>
         <div class="sub-title">PREDICTION ALGORITHM PRO</div>
         
@@ -274,27 +198,26 @@
           appId: "1:656549146292:web:f35944e4ae7b6db943f1e1",
           measurementId: "G-B5N5DG523J"
         };
+        
+        // 🛑 මෙතන ඔයාගේ WHATSAPP නම්බර් එක දාන්න (94...)
+        const adminWhatsapp = "94712345678"; 
         // ========================================================
 
-        // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
         const db = firebase.firestore();
 
-        // --- Logic: Show Notice ---
         function showNotice() {
             document.getElementById("loginScreen").style.display = "none";
             document.getElementById("mainApp").style.display = "none";
             document.getElementById("noticeModal").style.display = "flex";
         }
 
-        // --- Logic: Accept Notice (Enter App) ---
         function acceptNotice() {
             document.getElementById("noticeModal").style.display = "none";
             document.getElementById("mainApp").style.display = "block";
         }
 
-        // --- LOGIN FUNCTION ---
         document.getElementById("loginBtn").addEventListener("click", () => {
             const email = document.getElementById("email").value;
             const password = document.getElementById("password").value;
@@ -313,7 +236,6 @@
                     const user = userCredential.user;
                     btn.innerText = "CHECKING DATABASE...";
 
-                    // Check Firestore for expiryDate
                     db.collection("users").doc(user.uid).get().then((doc) => {
                         if (doc.exists) {
                             const data = doc.data();
@@ -323,12 +245,19 @@
                                 const today = new Date();
 
                                 if (today > expiryDate) {
+                                    // --- EXPIRED LOGIC WITH WHATSAPP ---
                                     auth.signOut();
+                                    let message = `Hello Admin, My Aviator App subscription expired. My UID: ${user.uid}`;
+                                    let waLink = `https://wa.me/${adminWhatsapp}?text=${encodeURIComponent(message)}`;
+                                    
                                     errorMsg.style.display = "block";
-                                    errorMsg.innerHTML = "🚫 <b>EXPIRED!</b><br>Valid until: " + data.expiryDate;
+                                    errorMsg.innerHTML = `🚫 <b>ACCOUNT EXPIRED!</b><br>
+                                                          Valid until: ${data.expiryDate}<br>
+                                                          <a href="${waLink}" class="btn-renew">
+                                                            <i class="fab fa-whatsapp"></i> RENEW NOW
+                                                          </a>`;
                                     btn.innerText = "VERIFY & LOGIN 🔓";
                                 } else {
-                                    // SUCCESS: Validated -> Show Notice
                                     document.getElementById("userExpiryDisplay").innerText = "Valid Until: " + data.expiryDate;
                                     showNotice(); 
                                 }
@@ -337,11 +266,10 @@
                                 showNotice();
                             }
                         } else {
-                            // User not found in DB
                             auth.signOut();
                             errorMsg.style.display = "block";
-                            errorMsg.innerHTML = "⚠️ <b>DATABASE ERROR:</b><br>User ID not found.<br>Please contact Admin.";
-                            btn.innerText = "VERIFY & LOGIN 🔓";
+                            errorMsg.innerHTML = "⚠️ <b>DATABASE ERROR:</b><br>User ID not found.<br>UID: " + user.uid;
+                            btn.innerText = "SETUP REQUIRED";
                         }
                     }).catch((error) => {
                         errorMsg.style.display = "block";
@@ -356,36 +284,29 @@
                 });
         });
 
-        // --- LOGOUT ---
         document.getElementById("logoutBtn").addEventListener("click", () => {
             auth.signOut();
             window.location.reload();
         });
 
-        // --- AUTH STATE LISTENER (On Refresh) ---
         auth.onAuthStateChanged((user) => {
             if (user) {
-                // If logged in, Re-check DB silently to route correctly
                 db.collection("users").doc(user.uid).get().then((doc) => {
                     if (doc.exists) {
                         const data = doc.data();
                         document.getElementById("userExpiryDisplay").innerText = "Valid Until: " + (data.expiryDate || "Unlimited");
-                        
-                        // If we are currently on Login screen, move to Notice
                         if(document.getElementById("mainApp").style.display === "none" && document.getElementById("noticeModal").style.display === "none") {
                             showNotice();
                         }
                     }
                 }).catch(() => {});
             } else {
-                // Not logged in -> Show Login
                 document.getElementById("loginScreen").style.display = "block";
                 document.getElementById("noticeModal").style.display = "none";
                 document.getElementById("mainApp").style.display = "none";
             }
         });
 
-        // --- CALCULATION LOGIC ---
         let currentAmpm = 'AM';
         function setAMPM(val) {
             currentAmpm = val;

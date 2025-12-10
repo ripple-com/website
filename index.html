@@ -377,6 +377,245 @@
     </script>
 </body>
 </html>
+on>
+
+        <div id="resultArea">
+            <div class="result-panel">
+                <div style="font-size: 10px; color: #aaa; letter-spacing: 1px;">TARGET TIME</div>
+                <div class="time-display" id="displaySignal">00:00 AM</div>
+            </div>
+
+            <div class="result-panel" style="border-color: #ffd700;">
+                <div style="font-size: 10px; color: #aaa; letter-spacing: 1px;">ACTIVE ZONE (4 MIN)</div>
+                <div class="zone-display">
+                    <span id="zoneStart">00:00</span> - <span id="zoneEnd">00:00</span>
+                </div>
+            </div>
+
+            <button class="btn-copy" onclick="manualCopy()" id="copyButton">📋 COPY SIGNAL</button>
+        </div>
+
+        <div class="social-area">
+            <a href="https://www.youtube.com/" target="_blank" class="social-btn yt">
+                <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                Channel
+            </a>
+            <a href="https://chat.whatsapp.com/" target="_blank" class="social-btn wa">
+                <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                Group
+            </a>
+        </div>
+
+        <button class="btn-logout" id="logoutBtn">LOGOUT 🔒</button>
+        <div class="footer">Signal App Powered by Suwahas Sathsara</div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+    <script>
+        // ========================================================
+        // 🔥 YOUR FIREBASE CONFIGURATION 🔥
+        // ========================================================
+        const firebaseConfig = {
+          apiKey: "AIzaSyBmLvGb0vXkJhKVKew1sYZpHuVPo-mHvjk",
+          authDomain: "aviatorsignal-ff90c.firebaseapp.com",
+          projectId: "aviatorsignal-ff90c",
+          storageBucket: "aviatorsignal-ff90c.firebasestorage.app",
+          messagingSenderId: "656549146292",
+          appId: "1:656549146292:web:f35944e4ae7b6db943f1e1",
+          measurementId: "G-B5N5DG523J"
+        };
+        // ========================================================
+
+        // Initialize Firebase (Compat Mode)
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        // Function to close notice and show app
+        function closeNotice() {
+            document.getElementById("noticeModal").style.display = "none";
+            document.getElementById("mainApp").style.display = "block";
+        }
+
+        // --- LOGIN FUNCTION ---
+        document.getElementById("loginBtn").addEventListener("click", () => {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const errorMsg = document.getElementById("loginError");
+            const btn = document.getElementById("loginBtn");
+
+            if(!email || !password) {
+                errorMsg.style.display = "block"; errorMsg.innerText = "⚠️ Email & Password Required!"; return;
+            }
+
+            btn.innerText = "CONNECTING...";
+            errorMsg.style.display = "none";
+            
+            auth.signInWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                    console.log("Auth Success:", user.uid);
+                    btn.innerText = "CHECKING DATABASE...";
+
+                    // Check Firestore for expiryDate
+                    db.collection("users").doc(user.uid).get().then((doc) => {
+                        if (doc.exists) {
+                            const data = doc.data();
+                            
+                            if (data.expiryDate) {
+                                const expiryDate = new Date(data.expiryDate);
+                                const today = new Date();
+
+                                if (today > expiryDate) {
+                                    auth.signOut();
+                                    errorMsg.style.display = "block";
+                                    errorMsg.innerHTML = "🚫 <b>EXPIRED!</b><br>Valid until: " + data.expiryDate;
+                                    btn.innerText = "LOGIN FAILED";
+                                } else {
+                                    // SUCCESS! HIDE LOGIN, SHOW NOTICE
+                                    document.getElementById("loginScreen").style.display = "none";
+                                    document.getElementById("noticeModal").style.display = "flex"; // Show Popup
+                                    document.getElementById("userExpiryDisplay").innerText = "Valid Until: " + data.expiryDate;
+                                }
+                            } else {
+                                document.getElementById("loginScreen").style.display = "none";
+                                document.getElementById("noticeModal").style.display = "flex";
+                                document.getElementById("userExpiryDisplay").innerText = "Unlimited Access";
+                            }
+                        } else {
+                            // Document not found
+                            console.error("No document found for UID:", user.uid);
+                            auth.signOut();
+                            errorMsg.style.display = "block";
+                            errorMsg.innerHTML = "⚠️ <b>DATABASE ERROR:</b><br>UID not found in database.";
+                            btn.innerText = "SETUP REQUIRED";
+                        }
+                    }).catch((error) => {
+                        console.error("DB Error:", error);
+                        errorMsg.style.display = "block";
+                        errorMsg.innerText = "❌ Database Error: " + error.message;
+                        btn.innerText = "TRY AGAIN";
+                    });
+                })
+                .catch((error) => {
+                    console.error("Auth Error:", error);
+                    btn.innerText = "LOGIN NOW 🔓";
+                    errorMsg.style.display = "block";
+                    errorMsg.innerText = "❌ Login Error: " + error.code;
+                });
+        });
+
+        // --- LOGOUT ---
+        document.getElementById("logoutBtn").addEventListener("click", () => {
+            auth.signOut();
+            window.location.reload(); // Reload page to reset
+        });
+
+        // --- AUTH LISTENER (Keep logged in) ---
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                // If user is already logged in on refresh, check DB silently then show NOTICE (or App)
+                // For better UX, let's show notice on refresh too if valid
+                db.collection("users").doc(user.uid).get().then((doc) => {
+                    if (doc.exists) {
+                        const data = doc.data();
+                        document.getElementById("loginScreen").style.display = "none";
+                        // If main app is not already visible, show notice
+                        if(document.getElementById("mainApp").style.display === "none") {
+                            document.getElementById("noticeModal").style.display = "flex";
+                        }
+                        document.getElementById("userExpiryDisplay").innerText = "Valid Until: " + (data.expiryDate || "Unlimited");
+                    }
+                }).catch(() => { /* Ignore */ });
+            } else {
+                document.getElementById("loginScreen").style.display = "block";
+                document.getElementById("noticeModal").style.display = "none";
+                document.getElementById("mainApp").style.display = "none";
+            }
+        });
+    </script>
+
+    <script>
+        let currentAmpm = 'AM';
+        function setAMPM(val) {
+            currentAmpm = val;
+            document.getElementById('btnAM').className = val === 'AM' ? 'ampm-btn active' : 'ampm-btn';
+            document.getElementById('btnPM').className = val === 'PM' ? 'ampm-btn active' : 'ampm-btn';
+        }
+        function checkInput(el, nextId) {
+            if (el.value.length >= 2) {
+                if(nextId) document.getElementById(nextId).focus();
+                else el.blur();
+            }
+        }
+        function calculateSignal() {
+            var oddInput = document.getElementById("lastOdd").value;
+            var hhInput = document.getElementById("inputHour").value;
+            var mmInput = document.getElementById("inputMinute").value;
+
+            if (oddInput === "" || hhInput === "" || mmInput === "") {
+                alert("Please enter all details!");
+                return;
+            }
+
+            var odd = parseFloat(oddInput);
+            var minutesToAdd = Math.floor(odd / 2);
+            var hours = parseInt(hhInput);
+            var minutes = parseInt(mmInput);
+
+            if (currentAmpm === 'PM' && hours < 12) hours = hours + 12;
+            if (currentAmpm === 'AM' && hours === 12) hours = 0;
+
+            var date = new Date();
+            date.setHours(hours);
+            date.setMinutes(minutes);
+            
+            var signalDate = new Date(date.getTime() + (minutesToAdd * 60000));
+            var startZone = new Date(signalDate.getTime() - (2 * 60000));
+            var endZone = new Date(signalDate.getTime() + (2 * 60000));
+
+            function formatTime(dateObj) {
+                var h = dateObj.getHours();
+                var m = dateObj.getMinutes().toString().padStart(2, '0');
+                var ampm = h >= 12 ? 'PM' : 'AM';
+                h = h % 12;
+                h = h ? h : 12;
+                return h + ":" + m + " " + ampm;
+            }
+
+            document.getElementById("displaySignal").innerText = formatTime(signalDate);
+            document.getElementById("zoneStart").innerText = formatTime(startZone);
+            document.getElementById("zoneEnd").innerText = formatTime(endZone);
+            document.getElementById("resultArea").style.display = "block";
+            
+            var btn = document.getElementById("copyButton");
+            btn.innerText = "📋 COPY SIGNAL";
+            btn.style.background = "rgba(255, 255, 255, 0.1)"; btn.style.color = "white";
+        }
+        function manualCopy() {
+            var signal = document.getElementById("displaySignal").innerText;
+            var start = document.getElementById("zoneStart").innerText;
+            var end = document.getElementById("zoneEnd").innerText;
+            var textToCopy = `🚨 *AVIATOR SIGNAL* 🚨\n\n` +
+                             `🎯 Next Odd Time: ${signal}\n` +
+                             `🕒 Zone: ${start} To ${end}\n\n` +
+                             `🔥 *විනාඩි හතර තුළ Bet කරන්න*`;
+            var textArea = document.createElement("textarea");
+            textArea.value = textToCopy;
+            textArea.style.position = "fixed";
+            textArea.style.left = "-9999px";
+            document.body.appendChild(textArea);
+            textArea.select();
+            textArea.setSelectionRange(0, 99999);
+            try { document.execCommand('copy'); var btn = document.getElementById("copyButton"); btn.innerText = "✅ COPIED!"; btn.style.background = "#00ff88"; btn.style.color = "#000"; } catch (err) { alert("Manual Copy Required"); }
+            document.body.removeChild(textArea);
+        }
+    </script>
+</body>
+</html>
 8-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
                 Group
             </a>
@@ -579,4 +818,5 @@
     </script>
 </body>
 </html>
+
 

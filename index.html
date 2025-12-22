@@ -65,6 +65,7 @@
             overflow-y: auto; 
             position: relative; 
             z-index: 10; 
+            display: none; 
         }
         .tech-card::-webkit-scrollbar { width: 0; }
 
@@ -74,24 +75,23 @@
             width: 100px;
             height: 100px;
             margin: 0 auto 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            border: 2px solid var(--primary);
+            box-shadow: 0 0 25px rgba(0, 242, 255, 0.5);
+            background: rgba(5, 11, 20, 0.8);
         }
         .profile-img {
             width: 100%;
             height: 100%;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid var(--primary);
-            box-shadow: 0 0 25px rgba(0, 242, 255, 0.5);
             padding: 4px;
-            background: rgba(5, 11, 20, 0.8);
-            transition: transform 0.3s ease;
-        }
-        .profile-img:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 35px rgba(0, 242, 255, 0.8);
         }
 
-        /* --- NEW USER PROFILE SECTION STYLES --- */
+        /* --- USER PROFILE SECTION STYLES --- */
         .profile-section {
             display: flex;
             align-items: center;
@@ -221,15 +221,6 @@
             position: relative;
             overflow: hidden;
         }
-        .btn-analyze::after {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: 0.5s;
-        }
-        .btn-analyze:hover::after { left: 100%; }
         .btn-analyze:active { transform: scale(0.98); }
 
         .btn-logout { 
@@ -249,16 +240,6 @@
         
         #loginError { color: #ff4d4d; font-size: 13px; margin-top: 15px; display: none; font-weight: bold; background: rgba(255,0,0,0.1); padding: 10px; border-radius: 8px; border: 1px solid rgba(255,0,0,0.3); }
         
-        /* Renew Button */
-        .btn-renew {
-            display: block; width: 100%; text-decoration: none;
-            background: #25D366; color: #fff; padding: 10px;
-            border-radius: 8px; margin-top: 10px; font-weight: bold;
-            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
-            text-transform: uppercase;
-            font-family: 'Rajdhani', sans-serif;
-        }
-
         /* Modal */
         #noticeModal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.95); z-index: 9999; display: none; justify-content: center; align-items: center; padding: 20px; }
         .notice-content { background: #0b111a; border: 1px solid var(--primary); padding: 30px 20px; border-radius: 15px; width: 100%; max-width: 380px; text-align: center; box-shadow: 0 0 50px rgba(0, 242, 255, 0.2); animation: slideUp 0.4s ease-out; position: relative; }
@@ -282,19 +263,15 @@
         .time-display { font-size: 36px; font-weight: 800; color: var(--primary); text-shadow: 0 0 20px rgba(0, 242, 255, 0.4); margin: 5px 0; font-family: 'Rajdhani', sans-serif; }
         .zone-display { font-size: 20px; color: #ffd700; font-weight: 600; font-family: 'Rajdhani', sans-serif; letter-spacing: 1px;}
         .btn-copy { width: 100%; padding: 12px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; color: white; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; font-family: 'Rajdhani', sans-serif; letter-spacing: 1px; transition: 0.3s;}
-        .btn-copy:hover { border-color: var(--primary); color: var(--primary); }
         
-        /* Footer/Social */
+        /* Social */
         .social-area { margin-top: 25px; padding-top: 15px; border-top: 1px solid rgba(255, 255, 255, 0.1); display: flex; gap: 10px; justify-content: center; }
         .social-btn { flex: 1; display: flex; align-items: center; justify-content: center; padding: 12px; border-radius: 8px; text-decoration: none; color: white; font-size: 13px; font-weight: 600; transition: 0.3s; border: 1px solid transparent; gap: 8px; font-family: 'Poppins', sans-serif; }
         .yt { background: rgba(255, 0, 0, 0.1); border-color: rgba(255, 0, 0, 0.4); }
-        .yt:hover { background: rgba(255, 0, 0, 0.3); }
         .wa { background: rgba(0, 255, 136, 0.1); border-color: rgba(0, 255, 136, 0.4); }
-        .wa:hover { background: rgba(0, 255, 136, 0.3); }
         
         .footer { margin-top: 25px; font-size: 10px; color: var(--text-muted); letter-spacing: 0.5px; }
         
-        #mainApp, #noticeModal { display: none; }
         input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
         input[type=number] { -moz-appearance: textfield; }
         @keyframes blink { 50% { opacity: 0; } }
@@ -342,6 +319,39 @@
         <div class="footer">SYSTEM ID: 2.0.4 | POWERED BY SUWAHAS SATHSARA</div>
     </div>
 
+    <div id="deviceLockScreen" class="tech-card">
+        <div class="profile-wrapper">
+            <i class="fa-solid fa-mobile-screen-button" style="font-size: 40px; color: var(--primary);"></i>
+        </div>
+
+        <h1>DEVICE LOCK</h1>
+        <div class="sub-title">AUTHORIZATION REQUIRED</div>
+
+        <div style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; border: 1px dashed var(--primary); margin-bottom: 20px;">
+            <div style="font-size: 10px; color: #8b9bb4; margin-bottom: 5px;">YOUR DEVICE ID</div>
+            <div id="showDeviceId" style="font-size: 16px; color: #fff; font-weight: bold; font-family: 'Rajdhani', sans-serif; letter-spacing: 1px; word-break: break-all;">LOADING...</div>
+            <button onclick="copyDeviceId()" style="background: transparent; border: none; color: var(--primary); cursor: pointer; font-size: 12px; margin-top: 8px; padding: 5px 10px; border: 1px solid var(--primary); border-radius: 4px;">
+                <i class="fa-regular fa-copy"></i> TAP TO COPY
+            </button>
+        </div>
+
+        <p style="font-size: 12px; color: #ccc; margin-bottom: 20px; line-height: 1.5;">
+            You don't have permission to access this App. Please send this ID to Admin to approve your device.
+        </p>
+
+        <div class="social-area">
+            <a id="waLink" href="#" target="_blank" class="social-btn wa">
+                <i class="fab fa-whatsapp"></i> Send to Admin
+            </a>
+            <a href="https://t.me/suwahassathsara" target="_blank" class="social-btn" style="background: rgba(0, 136, 204, 0.1); border: 1px solid rgba(0, 136, 204, 0.4);">
+                <i class="fab fa-telegram"></i> Telegram
+            </a>
+        </div>
+
+        <button class="btn-logout" onclick="auth.signOut(); location.reload();">SIGN OUT</button>
+        <div class="footer">SECURITY ID CHECKER V1.0</div>
+    </div>
+
     <div id="mainApp" class="tech-card">
         <h1>SUWAHAS SATHSARA</h1>
         <div class="sub-title">SIGNAL PREDICTION PRO</div>
@@ -353,6 +363,7 @@
                 <div id="appUserExpiry" class="profile-status"><i class="fa-solid fa-spinner fa-spin"></i> VERIFYING</div>
             </div>
         </div>
+
         <div class="input-box">
             <label>LAST BIG ODD (x)</label>
             <input type="number" id="lastOdd" class="std-input" placeholder="43.06" step="0.01">
@@ -431,13 +442,32 @@
         const auth = firebase.auth();
         const db = firebase.firestore();
 
+        // --- 🆕 DEVICE ID FUNCTIONS 🆕 ---
+        function getDeviceId() {
+            let deviceId = localStorage.getItem("aviator_device_id");
+            if (!deviceId) {
+                // Generate a random ID if not exists
+                deviceId = 'DEV-' + Math.random().toString(36).substr(2, 6).toUpperCase() + 
+                           '-' + Math.random().toString(36).substr(2, 6).toUpperCase();
+                localStorage.setItem("aviator_device_id", deviceId);
+            }
+            return deviceId;
+        }
+
+        function copyDeviceId() {
+            const id = document.getElementById("showDeviceId").innerText;
+            navigator.clipboard.writeText(id).then(() => {
+                alert("Device ID Copied: " + id);
+            }).catch(() => {
+                alert("Please manually copy the ID.");
+            });
+        }
+
         // Helper function to update Profile UI
         function updateProfileUI(email, expiryDate) {
             const emailDiv = document.getElementById("appUserEmail");
             const expiryDiv = document.getElementById("appUserExpiry");
-            
             if(emailDiv) emailDiv.innerText = email;
-            
             if(expiryDiv) {
                 if(expiryDate) {
                     expiryDiv.innerHTML = '<i class="fa-solid fa-clock"></i> VALID: ' + expiryDate;
@@ -451,13 +481,73 @@
 
         function showNotice() {
             document.getElementById("loginScreen").style.display = "none";
+            document.getElementById("deviceLockScreen").style.display = "none"; 
             document.getElementById("mainApp").style.display = "none";
             document.getElementById("noticeModal").style.display = "flex";
+        }
+
+        function showDeviceLock(currentId, userEmail) {
+            document.getElementById("loginScreen").style.display = "none";
+            document.getElementById("mainApp").style.display = "none";
+            document.getElementById("noticeModal").style.display = "none";
+            document.getElementById("deviceLockScreen").style.display = "block";
+            
+            document.getElementById("showDeviceId").innerText = currentId;
+            
+            let msg = `Hello Admin, Please approve my Device.\n\n📧 Email: ${userEmail}\n📱 Device ID: ${currentId}`;
+            document.getElementById("waLink").href = `https://wa.me/${adminWhatsapp}?text=${encodeURIComponent(msg)}`;
         }
 
         function acceptNotice() {
             document.getElementById("noticeModal").style.display = "none";
             document.getElementById("mainApp").style.display = "block";
+        }
+
+        // --- 🔥 MULTI-DEVICE CHECK LOGIC 🔥 ---
+        function checkUserAccess(user) {
+            const myDeviceId = getDeviceId();
+            
+            db.collection("users").doc(user.uid).get().then((doc) => {
+                if (doc.exists) {
+                    const data = doc.data();
+                    
+                    // 1. Check Expiry
+                    if (data.expiryDate) {
+                        const expiryDate = new Date(data.expiryDate);
+                        const today = new Date();
+                        if (today > expiryDate) {
+                            auth.signOut();
+                            alert("Your Subscription has Expired!");
+                            window.location.reload();
+                            return;
+                        }
+                    }
+
+                    // 2. 🔥 CHECK IF DEVICE IS IN ALLOWED LIST 🔥
+                    // If 'allowed_devices' array exists AND includes my ID
+                    if (data.allowed_devices && data.allowed_devices.includes(myDeviceId)) {
+                        // Success: ID Found
+                        updateProfileUI(user.email, data.expiryDate);
+                        showNotice();
+                    } else {
+                        // Fail: ID Not in List
+                        updateProfileUI(user.email, data.expiryDate);
+                        showDeviceLock(myDeviceId, user.email);
+                    }
+
+                } else {
+                    // New User - Create Doc with Empty Array
+                    db.collection("users").doc(user.uid).set({
+                        email: user.email,
+                        createdAt: new Date().toISOString(),
+                        allowed_devices: [] // 👈 Init as Array
+                    }).then(() => {
+                        showDeviceLock(myDeviceId, user.email);
+                    });
+                }
+            }).catch((error) => {
+                alert("Database Error: " + error.message);
+            });
         }
 
         document.getElementById("loginBtn").addEventListener("click", () => {
@@ -470,66 +560,12 @@
                 errorMsg.style.display = "block"; errorMsg.innerText = "⚠️ ENTER CREDENTIALS"; return;
             }
 
-            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> CONNECTING...';
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> CHECKING DB...';
             errorMsg.style.display = "none";
             
             auth.signInWithEmailAndPassword(email, password)
                 .then((userCredential) => {
-                    const user = userCredential.user;
-                    
-                    // --- 🔥 NEW: AUTO SAVE EMAIL TO DB ON LOGIN 🔥 ---
-                    // This fixes the "No Email" issue in Admin Panel
-                    db.collection("users").doc(user.uid).set({
-                        email: user.email
-                    }, { merge: true });
-                    // -----------------------------------------------
-
-                    btn.innerHTML = '<i class="fa-solid fa-database"></i> CHECKING DB...';
-
-                    db.collection("users").doc(user.uid).get().then((doc) => {
-                        if (doc.exists) {
-                            const data = doc.data();
-                            
-                            // UPDATE PROFILE UI
-                            updateProfileUI(user.email, data.expiryDate);
-
-                            if (data.expiryDate) {
-                                const expiryDate = new Date(data.expiryDate);
-                                const today = new Date();
-
-                                if (today > expiryDate) {
-                                    auth.signOut();
-                                    let message = `Hello Admin, My Aviator App subscription expired. My UID: ${user.uid}`;
-                                    let waLink = `https://wa.me/${adminWhatsapp}?text=${encodeURIComponent(message)}`;
-                                    
-                                    errorMsg.style.display = "block";
-                                    errorMsg.innerHTML = `🚫 <b>ACCESS DENIED (EXPIRED)</b><br>
-                                                          Valid until: ${data.expiryDate}<br>
-                                                          <a href="${waLink}" class="btn-renew">
-                                                            <i class="fab fa-whatsapp"></i> RENEW LICENSE
-                                                          </a>`;
-                                    btn.innerHTML = 'INITIALIZE SESSION <i class="fa-solid fa-arrow-right"></i>';
-                                } else {
-                                    showNotice(); 
-                                }
-                            } else {
-                                showNotice();
-                            }
-                        } else {
-                            // If doc doesn't exist, create it now (Fix for empty DB)
-                            db.collection("users").doc(user.uid).set({
-                                email: user.email,
-                                createdAt: new Date().toISOString()
-                            }).then(() => {
-                                updateProfileUI(user.email, null);
-                                showNotice();
-                            });
-                        }
-                    }).catch((error) => {
-                        errorMsg.style.display = "block";
-                        errorMsg.innerText = "❌ DB Error: " + error.message;
-                        btn.innerHTML = "TRY AGAIN";
-                    });
+                    // Logic handled in onAuthStateChanged
                 })
                 .catch((error) => {
                     btn.innerHTML = 'INITIALIZE SESSION <i class="fa-solid fa-arrow-right"></i>';
@@ -545,31 +581,16 @@
 
         auth.onAuthStateChanged((user) => {
             if (user) {
-                // --- 🔥 AUTO FIX ON RELOAD 🔥 ---
-                db.collection("users").doc(user.uid).set({
-                     email: user.email
-                }, { merge: true });
-                // --------------------------------
-
-                db.collection("users").doc(user.uid).get().then((doc) => {
-                    if (doc.exists) {
-                        const data = doc.data();
-                        
-                        // UPDATE PROFILE UI
-                        updateProfileUI(user.email, data.expiryDate);
-
-                        if(document.getElementById("mainApp").style.display === "none" && document.getElementById("noticeModal").style.display === "none") {
-                            showNotice();
-                        }
-                    }
-                }).catch(() => {});
+                checkUserAccess(user);
             } else {
                 document.getElementById("loginScreen").style.display = "block";
+                document.getElementById("deviceLockScreen").style.display = "none";
                 document.getElementById("noticeModal").style.display = "none";
                 document.getElementById("mainApp").style.display = "none";
             }
         });
 
+        // --- SIGNAL CALCULATION LOGIC ---
         let currentAmpm = 'AM';
         function setAMPM(val) {
             currentAmpm = val;
@@ -626,34 +647,19 @@
             btn.innerHTML = '<i class="fa-solid fa-check"></i> SIGNAL READY';
             btn.style.background = "rgba(0, 242, 255, 0.2)"; 
             btn.style.color = "#00f2ff";
-            btn.style.borderColor = "#00f2ff";
         }
         function manualCopy() {
             var signal = document.getElementById("displaySignal").innerText;
             var start = document.getElementById("zoneStart").innerText;
             var end = document.getElementById("zoneEnd").innerText;
-            var textToCopy = `🚨 *AVIATOR SIGNAL PRO* 🚨\n\n` +
-                             `🎯 Next Odd Time: ${signal}\n` +
-                             `🕒 Zone: ${start} To ${end}\n\n` +
-                             `🔥 *විනාඩි හතර තුළ Bet කරන්න*`;
+            var textToCopy = `🚨 *AVIATOR SIGNAL PRO* 🚨\n\n🎯 Next Odd Time: ${signal}\n🕒 Zone: ${start} To ${end}\n\n🔥 *විනාඩි හතර තුළ Bet කරන්න*`;
             var textArea = document.createElement("textarea");
             textArea.value = textToCopy;
             textArea.style.position = "fixed";
             textArea.style.left = "-9999px";
             document.body.appendChild(textArea);
             textArea.select();
-            textArea.setSelectionRange(0, 99999);
-            try { 
-                document.execCommand('copy'); 
-                var btn = document.getElementById("copyButton"); 
-                btn.innerHTML = '<i class="fa-solid fa-check-double"></i> COPIED TO CLIPBOARD'; 
-                setTimeout(() => {
-                    btn.innerHTML = '<i class="fa-regular fa-copy"></i> COPY SIGNAL DATA';
-                    btn.style.background = "rgba(255, 255, 255, 0.05)";
-                    btn.style.color = "white";
-                    btn.style.borderColor = "rgba(255,255,255,0.1)";
-                }, 2000);
-            } catch (err) { alert("Manual Copy Required"); }
+            try { document.execCommand('copy'); alert("Signal Data Copied!"); } catch (err) { alert("Manual Copy Required"); }
             document.body.removeChild(textArea);
         }
     </script>

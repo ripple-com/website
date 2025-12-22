@@ -476,6 +476,14 @@
             auth.signInWithEmailAndPassword(email, password)
                 .then((userCredential) => {
                     const user = userCredential.user;
+                    
+                    // --- 🔥 NEW: AUTO SAVE EMAIL TO DB ON LOGIN 🔥 ---
+                    // This fixes the "No Email" issue in Admin Panel
+                    db.collection("users").doc(user.uid).set({
+                        email: user.email
+                    }, { merge: true });
+                    // -----------------------------------------------
+
                     btn.innerHTML = '<i class="fa-solid fa-database"></i> CHECKING DB...';
 
                     db.collection("users").doc(user.uid).get().then((doc) => {
@@ -508,10 +516,14 @@
                                 showNotice();
                             }
                         } else {
-                            auth.signOut();
-                            errorMsg.style.display = "block";
-                            errorMsg.innerHTML = "⚠️ <b>DB ERROR:</b><br>User ID Missing.<br>UID: " + user.uid;
-                            btn.innerHTML = "SETUP REQUIRED";
+                            // If doc doesn't exist, create it now (Fix for empty DB)
+                            db.collection("users").doc(user.uid).set({
+                                email: user.email,
+                                createdAt: new Date().toISOString()
+                            }).then(() => {
+                                updateProfileUI(user.email, null);
+                                showNotice();
+                            });
                         }
                     }).catch((error) => {
                         errorMsg.style.display = "block";
@@ -533,6 +545,12 @@
 
         auth.onAuthStateChanged((user) => {
             if (user) {
+                // --- 🔥 AUTO FIX ON RELOAD 🔥 ---
+                db.collection("users").doc(user.uid).set({
+                     email: user.email
+                }, { merge: true });
+                // --------------------------------
+
                 db.collection("users").doc(user.uid).get().then((doc) => {
                     if (doc.exists) {
                         const data = doc.data();

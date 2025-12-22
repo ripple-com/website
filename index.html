@@ -3,22 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Suwahas Sathsara - MATH ALGORITHM PRO</title>
+    <title>Suwahas Sathsara Aviator Signal PRO</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* --- CORE STYLES (CYBER THEME) --- */
+        /* --- CYBER-TECH STYLES --- */
         :root {
             --primary: #00f2ff;
             --secondary: #0051ff;
             --bg-dark: #050b14;
-            --card-bg: rgba(10, 20, 35, 0.92);
+            --card-bg: rgba(10, 20, 35, 0.85);
             --border: rgba(0, 242, 255, 0.3);
             --text-main: #ffffff;
             --text-muted: #8b9bb4;
-            --success: #00ff88;
         }
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -28,117 +27,279 @@
             font-family: 'Poppins', sans-serif; 
             background-color: var(--bg-dark);
             background-image: 
-                linear-gradient(rgba(0, 242, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 242, 255, 0.03) 1px, transparent 1px);
+                linear-gradient(rgba(0, 242, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 242, 255, 0.05) 1px, transparent 1px);
             background-size: 30px 30px;
-            min-height: 100vh; 
-            display: flex; justify-content: center; align-items: center; 
+            height: 100vh; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
             color: var(--text-main); 
+            overflow: hidden; 
         }
 
+        /* Animated Glow Background */
         .glow-bg {
-            position: fixed; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% 50%, rgba(0, 81, 255, 0.1) 0%, transparent 60%);
-            z-index: -1; animation: pulseBg 6s infinite ease-in-out;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 81, 255, 0.15) 0%, transparent 70%);
+            z-index: -1;
+            animation: pulseBg 5s infinite ease-in-out;
         }
-        @keyframes pulseBg { 0%, 100% { opacity: 0.4; } 50% { opacity: 0.8; } }
+        @keyframes pulseBg { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
 
-        /* Tech Card */
+        /* Card Style */
         .tech-card { 
-            background: var(--card-bg); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); 
-            border: 1px solid var(--border); padding: 30px; border-radius: 16px; 
-            width: 90%; max-width: 450px; text-align: center; 
-            box-shadow: 0 0 50px rgba(0, 0, 0, 0.7); position: relative; z-index: 10; 
-            display: none; margin: 20px 0;
+            background: var(--card-bg); 
+            backdrop-filter: blur(20px); 
+            -webkit-backdrop-filter: blur(20px); 
+            border: 1px solid var(--border); 
+            padding: 30px; 
+            border-radius: 15px; 
+            width: 90%; 
+            max-width: 400px; 
+            text-align: center; 
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(0, 242, 255, 0.05); 
+            max-height: 95vh; 
+            overflow-y: auto; 
+            position: relative; 
+            z-index: 10; 
         }
+        .tech-card::-webkit-scrollbar { width: 0; }
 
-        /* Profile */
+        /* Login Profile Image */
         .profile-wrapper {
-            width: 90px; height: 90px; margin: 0 auto 15px;
-            display: flex; align-items: center; justify-content: center;
-            border-radius: 50%; border: 2px solid var(--primary);
-            box-shadow: 0 0 20px rgba(0, 242, 255, 0.4); background: #000;
+            position: relative;
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 20px auto;
         }
-        .profile-img { width: 100%; height: 100%; border-radius: 50%; padding: 3px; object-fit: cover; }
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary);
+            box-shadow: 0 0 25px rgba(0, 242, 255, 0.5);
+            padding: 4px;
+            background: rgba(5, 11, 20, 0.8);
+            transition: transform 0.3s ease;
+        }
+        .profile-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 35px rgba(0, 242, 255, 0.8);
+        }
 
+        /* --- NEW USER PROFILE SECTION STYLES --- */
         .profile-section {
-            display: flex; align-items: center; justify-content: space-between;
-            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 10px 15px; border-radius: 10px; margin-bottom: 20px; text-align: left;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(90deg, rgba(0, 242, 255, 0.05), rgba(0, 0, 0, 0.2));
+            border: 1px solid rgba(0, 242, 255, 0.2);
+            padding: 12px 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            text-align: left;
+            box-shadow: inset 0 0 20px rgba(0, 242, 255, 0.02);
         }
-        .user-info { display: flex; flex-direction: column; }
-        .user-name { font-family: 'Rajdhani', sans-serif; font-size: 16px; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: 1px; }
-        .user-status { font-size: 10px; color: var(--success); font-weight: 600; letter-spacing: 0.5px; }
+
+        .profile-pic-small {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: 2px solid var(--primary);
+            margin-right: 15px;
+            box-shadow: 0 0 10px rgba(0, 242, 255, 0.3);
+            object-fit: cover;
+        }
+
+        .profile-details {
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .profile-email {
+            font-size: 13px;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .profile-status {
+            font-size: 10px;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: rgba(0, 242, 255, 0.1);
+            padding: 2px 8px;
+            border-radius: 4px;
+            display: inline-block;
+            font-weight: 700;
+        }
 
         /* Typography */
         h1 { 
-            font-family: 'Rajdhani', sans-serif; font-weight: 800; margin: 0; font-size: 26px; 
-            background: linear-gradient(90deg, #fff, var(--primary)); 
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
-            text-transform: uppercase; letter-spacing: 1px;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700; 
+            margin: 0; 
+            font-size: 28px; 
+            background: linear-gradient(to right, #fff, var(--primary)); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            text-transform: uppercase; 
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(0, 242, 255, 0.3);
         }
-        .sub-title { font-family: 'Rajdhani', sans-serif; font-size: 11px; color: var(--primary); margin-bottom: 20px; letter-spacing: 3px; text-transform: uppercase; opacity: 0.8; }
-
-        /* Inputs */
-        .input-group { position: relative; margin-bottom: 20px; text-align: left; }
-        .input-label { font-size: 10px; color: var(--primary); font-weight: 700; text-transform: uppercase; margin-bottom: 5px; display: block; letter-spacing: 1px; }
         
-        .std-input { 
-            width: 100%; background: rgba(0, 0, 0, 0.5); 
-            border: 1px solid rgba(255, 255, 255, 0.15); padding: 12px; 
-            border-radius: 8px; color: white; font-size: 14px; 
-            font-family: 'Poppins', sans-serif; outline: none; transition: 0.3s;
+        .sub-title { 
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 12px; 
+            color: var(--primary); 
+            margin-bottom: 25px; 
+            letter-spacing: 3px; 
+            text-transform: uppercase;
         }
-        textarea.std-input { height: 90px; resize: none; font-family: monospace; font-size: 12px; }
-        .std-input:focus { border-color: var(--primary); box-shadow: 0 0 15px rgba(0, 242, 255, 0.15); }
-
+        
+        /* Inputs */
+        .input-box { position: relative; margin-bottom: 25px; }
+        .input-box label { 
+            position: absolute; 
+            top: -10px; 
+            left: 15px; 
+            background: #0d1624; 
+            padding: 0 8px; 
+            font-size: 11px; 
+            color: var(--primary); 
+            border: 1px solid var(--border);
+            border-radius: 4px; 
+            z-index: 10; 
+            font-weight: 600; 
+            text-transform: uppercase;
+        }
+        .std-input { 
+            width: 100%; 
+            background: rgba(0, 0, 0, 0.4); 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            padding: 15px; 
+            border-radius: 8px; 
+            color: white; 
+            font-size: 18px; 
+            font-family: 'Rajdhani', sans-serif; 
+            font-weight: 600;
+            outline: none; 
+            transition: 0.3s; 
+            text-align: center; 
+            letter-spacing: 1px;
+        }
+        .std-input:focus { 
+            border-color: var(--primary); 
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.2); 
+        }
+        
         /* Buttons */
         .btn-analyze { 
-            width: 100%; padding: 14px; 
+            width: 100%; 
+            padding: 15px; 
             background: linear-gradient(90deg, var(--secondary), #00c3ff); 
-            border: none; border-radius: 8px; color: white; 
-            font-size: 15px; font-weight: 700; font-family: 'Rajdhani', sans-serif; 
-            letter-spacing: 1px; cursor: pointer; 
-            box-shadow: 0 4px 15px rgba(0, 81, 255, 0.3); 
-            text-transform: uppercase; transition: 0.2s; display: flex; justify-content: center; align-items: center; gap: 8px;
+            border: none; 
+            border-radius: 8px; 
+            color: white; 
+            font-size: 16px; 
+            font-weight: 700; 
+            font-family: 'Rajdhani', sans-serif;
+            letter-spacing: 1px;
+            cursor: pointer; 
+            box-shadow: 0 5px 20px rgba(0, 81, 255, 0.4); 
+            text-transform: uppercase; 
+            margin-top: 10px; 
+            transition: all 0.2s; 
+            position: relative;
+            overflow: hidden;
         }
+        .btn-analyze::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+        .btn-analyze:hover::after { left: 100%; }
         .btn-analyze:active { transform: scale(0.98); }
-        
+
         .btn-logout { 
-            width: 100%; padding: 10px; background: rgba(255, 50, 50, 0.1); 
-            border: 1px solid rgba(255, 50, 50, 0.3); border-radius: 8px; color: #ff5555; 
-            font-size: 11px; font-weight: 700; cursor: pointer; margin-top: 25px; letter-spacing: 1px;
+            width: 100%; 
+            padding: 12px; 
+            background: rgba(255, 0, 0, 0.1); 
+            border: 1px solid #ff4d4d; 
+            border-radius: 8px; 
+            color: #ff4d4d; 
+            font-size: 12px; 
+            font-weight: 600; 
+            cursor: pointer; 
+            margin-top: 25px; 
+            transition: 0.3s;
         }
-
-        /* MATH ALGORITHM RESULTS GRID */
-        .result-grid {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 25px; display: none;
-        }
-        .signal-card {
-            background: linear-gradient(145deg, rgba(255,255,255,0.03), rgba(0, 242, 255, 0.02)); 
-            border: 1px solid rgba(0, 242, 255, 0.2);
-            border-radius: 12px; padding: 12px; text-align: center;
-            animation: slideUp 0.5s ease forwards; position: relative; overflow: hidden;
-        }
-        .signal-card::after {
-            content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px;
-            background: linear-gradient(90deg, transparent, var(--success), transparent);
-        }
+        .btn-logout:hover { background: rgba(255, 0, 0, 0.2); }
         
-        .card-label { font-size: 9px; color: #888; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
-        .card-odd { font-size: 22px; font-weight: 700; color: var(--success); font-family: 'Rajdhani', sans-serif; text-shadow: 0 0 10px rgba(0, 255, 136, 0.2); }
-        .card-time { font-size: 13px; font-weight: 600; color: #fff; margin-top: 2px; }
-        .card-prob { font-size: 9px; color: var(--secondary); margin-top: 4px; font-weight: bold; }
-
-        /* Loader */
-        .loader { display: none; margin-top: 20px; font-size: 12px; color: var(--primary); font-family: 'Rajdhani', sans-serif; letter-spacing: 1px; }
+        #loginError { color: #ff4d4d; font-size: 13px; margin-top: 15px; display: none; font-weight: bold; background: rgba(255,0,0,0.1); padding: 10px; border-radius: 8px; border: 1px solid rgba(255,0,0,0.3); }
+        
+        /* Renew Button */
+        .btn-renew {
+            display: block; width: 100%; text-decoration: none;
+            background: #25D366; color: #fff; padding: 10px;
+            border-radius: 8px; margin-top: 10px; font-weight: bold;
+            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
+            text-transform: uppercase;
+            font-family: 'Rajdhani', sans-serif;
+        }
 
         /* Modal */
-        #noticeModal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 999; display: none; justify-content: center; align-items: center; padding: 20px; }
-        .notice-content { background: #0f1520; border: 1px solid var(--primary); padding: 25px; border-radius: 12px; width: 100%; max-width: 350px; text-align: center; }
-        .btn-modal { width: 100%; padding: 12px; background: var(--secondary); color: white; border: none; border-radius: 6px; font-weight: bold; margin-top: 15px; cursor: pointer; }
+        #noticeModal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.95); z-index: 9999; display: none; justify-content: center; align-items: center; padding: 20px; }
+        .notice-content { background: #0b111a; border: 1px solid var(--primary); padding: 30px 20px; border-radius: 15px; width: 100%; max-width: 380px; text-align: center; box-shadow: 0 0 50px rgba(0, 242, 255, 0.2); animation: slideUp 0.4s ease-out; position: relative; }
+        .notice-title { color: var(--primary); font-weight: 800; font-size: 18px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; font-family: 'Rajdhani', sans-serif; }
+        .notice-text { font-size: 14px; color: #ccc; line-height: 1.7; margin-bottom: 25px; text-align: center; font-weight: 400; }
+        .signature { color: #ffcc00; font-weight: 700; margin-top: 15px; display: block; font-size: 12px; letter-spacing: 0.5px; }
+        .btn-notice { width: 100%; padding: 14px; background: var(--secondary); color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 14px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); font-family: 'Rajdhani', sans-serif; text-transform: uppercase;}
 
-        @keyframes slideUp { from { transform: translateY(15px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        /* Clock UI */
+        .clock-wrapper { display: flex; align-items: stretch; gap: 10px; }
+        .clock-container { flex: 2; display: flex; justify-content: center; align-items: center; background: rgba(0, 0, 0, 0.3); border-radius: 8px; padding: 10px; border: 1px solid rgba(255, 255, 255, 0.1); }
+        .clock-input { background: transparent; border: none; color: white; font-size: 38px; font-weight: 600; width: 55px; text-align: center; outline: none; font-family: 'Rajdhani', sans-serif; padding: 0; margin: 0; }
+        .clock-colon { font-size: 30px; margin: 0 2px; color: var(--primary); animation: blink 1s infinite; }
+        .ampm-toggle { flex: 1; display: flex; flex-direction: column; background: rgba(0, 0, 0, 0.3); border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1); overflow: hidden; }
+        .ampm-btn { flex: 1; border: none; background: transparent; color: #555; font-weight: bold; cursor: pointer; transition: 0.3s; font-size: 14px; font-family: 'Rajdhani', sans-serif; }
+        .ampm-btn.active { background: var(--primary); color: #000; box-shadow: 0 0 15px rgba(0, 242, 255, 0.4); }
+        
+        /* Results */
+        #resultArea { display: none; margin-top: 25px; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 20px; animation: fadeIn 0.5s ease; }
+        .result-panel { background: rgba(0, 242, 255, 0.05); border-radius: 10px; padding: 15px; margin-bottom: 10px; border: 1px solid var(--border); }
+        .time-display { font-size: 36px; font-weight: 800; color: var(--primary); text-shadow: 0 0 20px rgba(0, 242, 255, 0.4); margin: 5px 0; font-family: 'Rajdhani', sans-serif; }
+        .zone-display { font-size: 20px; color: #ffd700; font-weight: 600; font-family: 'Rajdhani', sans-serif; letter-spacing: 1px;}
+        .btn-copy { width: 100%; padding: 12px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; color: white; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; font-family: 'Rajdhani', sans-serif; letter-spacing: 1px; transition: 0.3s;}
+        .btn-copy:hover { border-color: var(--primary); color: var(--primary); }
+        
+        /* Footer/Social */
+        .social-area { margin-top: 25px; padding-top: 15px; border-top: 1px solid rgba(255, 255, 255, 0.1); display: flex; gap: 10px; justify-content: center; }
+        .social-btn { flex: 1; display: flex; align-items: center; justify-content: center; padding: 12px; border-radius: 8px; text-decoration: none; color: white; font-size: 13px; font-weight: 600; transition: 0.3s; border: 1px solid transparent; gap: 8px; font-family: 'Poppins', sans-serif; }
+        .yt { background: rgba(255, 0, 0, 0.1); border-color: rgba(255, 0, 0, 0.4); }
+        .yt:hover { background: rgba(255, 0, 0, 0.3); }
+        .wa { background: rgba(0, 255, 136, 0.1); border-color: rgba(0, 255, 136, 0.4); }
+        .wa:hover { background: rgba(0, 255, 136, 0.3); }
+        
+        .footer { margin-top: 25px; font-size: 10px; color: var(--text-muted); letter-spacing: 0.5px; }
+        
+        #mainApp, #noticeModal { display: none; }
+        input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+        input[type=number] { -moz-appearance: textfield; }
+        @keyframes blink { 50% { opacity: 0; } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
     </style>
 </head>
 <body>
@@ -147,48 +308,340 @@
 
     <div id="noticeModal">
         <div class="notice-content">
-            <h3 style="color:var(--primary); margin:0 0 15px 0;">⚠️ MATHEMATICAL NOTICE</h3>
-            <p style="font-size:12px; color:#ccc; line-height:1.6;">
-                This tool uses <b>Probability Theory</b> and <b>Gap Analysis</b> to predict outcomes. However, Aviator is RNG-based. Always manage your bankroll.<br><br>
-                මෙය ගණිතමය සම්භාවිතාව මත පදනම් වූ මෙවලමකි.
-            </p>
-            <button class="btn-modal" onclick="acceptNotice()">I UNDERSTAND</button>
+            <div class="notice-title"><i class="fa-solid fa-shield-halved"></i> SYSTEM NOTICE</div>
+            <div class="notice-text">
+                මෙම Aviator Signal Web App එක ගණිතමය උපකල්පණ ක්‍රමයකට සාදා ඇත. එම නිසා මෙම Web App එක Hack App එකක් නොවන බව කාරුණිකව සිතන්න.<br><br>
+                එම නිසා ඔබේ සම්පුර්ණ මුදල් භාවිතා කරමින් Bet කිරීමෙන් වළකින්න. අවම අගය රු.20 කින් Bet කරන්න.<br>
+                <span class="signature">Suwahas Sathsara Youtube Channel Owner</span>
+            </div>
+            <button class="btn-notice" onclick="acceptNotice()">I UNDERSTAND & ACCESS</button>
         </div>
     </div>
 
-    <div id="loginScreen" class="tech-card" style="display:block;">
+    <div id="loginScreen" class="tech-card">
         <div class="profile-wrapper">
             <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Profile" class="profile-img">
         </div>
-        <h1>ACCESS PORTAL</h1>
-        <div class="sub-title">SECURE LOGIN V3.0</div>
 
-        <div class="input-group">
-            <span class="input-label">Email Address</span>
+        <h1>LOGIN</h1>
+        <div class="sub-title">SECURE TERMINAL ACCESS</div>
+
+        <div class="input-box">
+            <label>EMAIL ADDRESS</label>
             <input type="email" id="email" class="std-input" placeholder="user@email.com">
         </div>
-        <div class="input-group">
-            <span class="input-label">Password</span>
+
+        <div class="input-box">
+            <label>PASSWORD</label>
             <input type="password" id="password" class="std-input" placeholder="••••••••">
         </div>
 
         <button class="btn-analyze" id="loginBtn">INITIALIZE SESSION <i class="fa-solid fa-arrow-right"></i></button>
-        <div id="loginError" style="color:#ff5555; font-size:12px; margin-top:10px; display:none;"></div>
+        <div id="loginError"></div>
+
+        <div class="footer">SYSTEM ID: 2.0.4 | POWERED BY SUWAHAS SATHSARA</div>
     </div>
 
-    <div id="deviceLockScreen" class="tech-card">
-        <div class="profile-wrapper">
-            <i class="fa-solid fa-lock" style="font-size:35px; color:var(--primary);"></i>
+    <div id="mainApp" class="tech-card">
+        <h1>SUWAHAS SATHSARA</h1>
+        <div class="sub-title">SIGNAL PREDICTION PRO</div>
+        
+        <div class="profile-section">
+            <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" class="profile-pic-small" alt="User">
+            <div class="profile-details">
+                <div id="appUserEmail" class="profile-email">Loading User...</div>
+                <div id="appUserExpiry" class="profile-status"><i class="fa-solid fa-spinner fa-spin"></i> VERIFYING</div>
+            </div>
         </div>
-        <h1>DEVICE LOCKED</h1>
-        <div class="sub-title">UNAUTHORIZED DEVICE DETECTED</div>
-
-        <div style="background:rgba(0,0,0,0.4); padding:15px; border-radius:8px; border:1px dashed #444; margin-bottom:15px;">
-            <div style="font-size:10px; color:#888;">DEVICE ID</div>
-            <div id="showDeviceId" style="font-size:14px; font-weight:bold; color:#fff; word-break:break-all;">Loading...</div>
+        <div class="input-box">
+            <label>LAST BIG ODD (x)</label>
+            <input type="number" id="lastOdd" class="std-input" placeholder="43.06" step="0.01">
         </div>
 
-        <a id="waLink" href="#" target="_blank" style="display:block; background:#25D366; color:#fff; text-decoration:none; padding:10px; border-radius:6px; font-weight:bold; font-size:13px; margin-bottom:10px;">
+        <div class="input-box">
+            <label>SYSTEM TIME INPUT</label>
+            <div class="clock-wrapper">
+                <div class="clock-container">
+                    <input type="number" id="inputHour" class="clock-input" placeholder="00" oninput="checkInput(this, 'inputMinute')">
+                    <span class="clock-colon">:</span>
+                    <input type="number" id="inputMinute" class="clock-input" placeholder="00" oninput="checkInput(this, null)">
+                </div>
+                <div class="ampm-toggle">
+                    <button class="ampm-btn active" id="btnAM" onclick="setAMPM('AM')">AM</button>
+                    <button class="ampm-btn" id="btnPM" onclick="setAMPM('PM')">PM</button>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn-analyze" onclick="calculateSignal()">CALCULATE SIGNAL <i class="fa-solid fa-bolt"></i></button>
+
+        <div id="resultArea">
+            <div class="result-panel">
+                <div style="font-size: 10px; color: #8b9bb4; letter-spacing: 2px; text-transform: uppercase;">Predicted Signal Time</div>
+                <div class="time-display" id="displaySignal">00:00 AM</div>
+            </div>
+
+            <div class="result-panel" style="border-color: #ffd700; background: rgba(255, 215, 0, 0.05);">
+                <div style="font-size: 10px; color: #ffd700; letter-spacing: 2px; text-transform: uppercase;">Active Zone (4 MIN)</div>
+                <div class="zone-display">
+                    <span id="zoneStart">00:00</span> - <span id="zoneEnd">00:00</span>
+                </div>
+            </div>
+
+            <button class="btn-copy" onclick="manualCopy()" id="copyButton">
+                <i class="fa-regular fa-copy"></i> COPY SIGNAL DATA
+            </button>
+        </div>
+
+        <div class="social-area">
+            <a href="https://www.youtube.com/@suwahas-sathsara-chandrasiri" target="_blank" class="social-btn yt">
+                <i class="fab fa-youtube"></i> Channel
+            </a>
+            <a href="https://chat.whatsapp.com/FSpAUoHvFSYLWKmfwwLBqC" target="_blank" class="social-btn wa">
+                <i class="fab fa-whatsapp"></i> Group
+            </a>
+        </div>
+
+        <button class="btn-logout" id="logoutBtn">TERMINATE SESSION <i class="fa-solid fa-power-off"></i></button>
+        <div class="footer">VERSION 2.5 | SUWAHAS SATHSARA</div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+    <script>
+        // ========================================================
+        // 🔥 FIREBASE CONFIGURATION 🔥
+        // ========================================================
+        const firebaseConfig = {
+          apiKey: "AIzaSyBmLvGb0vXkJhKVKew1sYZpHuVPo-mHvjk",
+          authDomain: "aviatorsignal-ff90c.firebaseapp.com",
+          projectId: "aviatorsignal-ff90c",
+          storageBucket: "aviatorsignal-ff90c.firebasestorage.app",
+          messagingSenderId: "656549146292",
+          appId: "1:656549146292:web:f35944e4ae7b6db943f1e1",
+          measurementId: "G-B5N5DG523J"
+        };
+        
+        const adminWhatsapp = "94768701677"; 
+        // ========================================================
+
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        // Helper function to update Profile UI
+        function updateProfileUI(email, expiryDate) {
+            const emailDiv = document.getElementById("appUserEmail");
+            const expiryDiv = document.getElementById("appUserExpiry");
+            
+            if(emailDiv) emailDiv.innerText = email;
+            
+            if(expiryDiv) {
+                if(expiryDate) {
+                    expiryDiv.innerHTML = '<i class="fa-solid fa-clock"></i> VALID: ' + expiryDate;
+                    expiryDiv.style.color = "#00f2ff"; 
+                } else {
+                    expiryDiv.innerHTML = '<i class="fa-solid fa-infinity"></i> LIFETIME ACCESS';
+                    expiryDiv.style.color = "#00ff88"; 
+                }
+            }
+        }
+
+        function showNotice() {
+            document.getElementById("loginScreen").style.display = "none";
+            document.getElementById("mainApp").style.display = "none";
+            document.getElementById("noticeModal").style.display = "flex";
+        }
+
+        function acceptNotice() {
+            document.getElementById("noticeModal").style.display = "none";
+            document.getElementById("mainApp").style.display = "block";
+        }
+
+        document.getElementById("loginBtn").addEventListener("click", () => {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const errorMsg = document.getElementById("loginError");
+            const btn = document.getElementById("loginBtn");
+
+            if(!email || !password) {
+                errorMsg.style.display = "block"; errorMsg.innerText = "⚠️ ENTER CREDENTIALS"; return;
+            }
+
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> CONNECTING...';
+            errorMsg.style.display = "none";
+            
+            auth.signInWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                    btn.innerHTML = '<i class="fa-solid fa-database"></i> CHECKING DB...';
+
+                    db.collection("users").doc(user.uid).get().then((doc) => {
+                        if (doc.exists) {
+                            const data = doc.data();
+                            
+                            // UPDATE PROFILE UI
+                            updateProfileUI(user.email, data.expiryDate);
+
+                            if (data.expiryDate) {
+                                const expiryDate = new Date(data.expiryDate);
+                                const today = new Date();
+
+                                if (today > expiryDate) {
+                                    auth.signOut();
+                                    let message = `Hello Admin, My Aviator App subscription expired. My UID: ${user.uid}`;
+                                    let waLink = `https://wa.me/${adminWhatsapp}?text=${encodeURIComponent(message)}`;
+                                    
+                                    errorMsg.style.display = "block";
+                                    errorMsg.innerHTML = `🚫 <b>ACCESS DENIED (EXPIRED)</b><br>
+                                                          Valid until: ${data.expiryDate}<br>
+                                                          <a href="${waLink}" class="btn-renew">
+                                                            <i class="fab fa-whatsapp"></i> RENEW LICENSE
+                                                          </a>`;
+                                    btn.innerHTML = 'INITIALIZE SESSION <i class="fa-solid fa-arrow-right"></i>';
+                                } else {
+                                    showNotice(); 
+                                }
+                            } else {
+                                showNotice();
+                            }
+                        } else {
+                            auth.signOut();
+                            errorMsg.style.display = "block";
+                            errorMsg.innerHTML = "⚠️ <b>DB ERROR:</b><br>User ID Missing.<br>UID: " + user.uid;
+                            btn.innerHTML = "SETUP REQUIRED";
+                        }
+                    }).catch((error) => {
+                        errorMsg.style.display = "block";
+                        errorMsg.innerText = "❌ DB Error: " + error.message;
+                        btn.innerHTML = "TRY AGAIN";
+                    });
+                })
+                .catch((error) => {
+                    btn.innerHTML = 'INITIALIZE SESSION <i class="fa-solid fa-arrow-right"></i>';
+                    errorMsg.style.display = "block";
+                    errorMsg.innerText = "❌ LOGIN FAILED: " + error.code;
+                });
+        });
+
+        document.getElementById("logoutBtn").addEventListener("click", () => {
+            auth.signOut();
+            window.location.reload();
+        });
+
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                db.collection("users").doc(user.uid).get().then((doc) => {
+                    if (doc.exists) {
+                        const data = doc.data();
+                        
+                        // UPDATE PROFILE UI
+                        updateProfileUI(user.email, data.expiryDate);
+
+                        if(document.getElementById("mainApp").style.display === "none" && document.getElementById("noticeModal").style.display === "none") {
+                            showNotice();
+                        }
+                    }
+                }).catch(() => {});
+            } else {
+                document.getElementById("loginScreen").style.display = "block";
+                document.getElementById("noticeModal").style.display = "none";
+                document.getElementById("mainApp").style.display = "none";
+            }
+        });
+
+        let currentAmpm = 'AM';
+        function setAMPM(val) {
+            currentAmpm = val;
+            document.getElementById('btnAM').className = val === 'AM' ? 'ampm-btn active' : 'ampm-btn';
+            document.getElementById('btnPM').className = val === 'PM' ? 'ampm-btn active' : 'ampm-btn';
+        }
+        function checkInput(el, nextId) {
+            if (el.value.length >= 2) {
+                if(nextId) document.getElementById(nextId).focus();
+                else el.blur();
+            }
+        }
+        function calculateSignal() {
+            var oddInput = document.getElementById("lastOdd").value;
+            var hhInput = document.getElementById("inputHour").value;
+            var mmInput = document.getElementById("inputMinute").value;
+
+            if (oddInput === "" || hhInput === "" || mmInput === "") {
+                alert("Please enter all details!");
+                return;
+            }
+
+            var odd = parseFloat(oddInput);
+            var minutesToAdd = Math.floor(odd / 2);
+            var hours = parseInt(hhInput);
+            var minutes = parseInt(mmInput);
+
+            if (currentAmpm === 'PM' && hours < 12) hours = hours + 12;
+            if (currentAmpm === 'AM' && hours === 12) hours = 0;
+
+            var date = new Date();
+            date.setHours(hours);
+            date.setMinutes(minutes);
+            
+            var signalDate = new Date(date.getTime() + (minutesToAdd * 60000));
+            var startZone = new Date(signalDate.getTime() - (2 * 60000));
+            var endZone = new Date(signalDate.getTime() + (2 * 60000));
+
+            function formatTime(dateObj) {
+                var h = dateObj.getHours();
+                var m = dateObj.getMinutes().toString().padStart(2, '0');
+                var ampm = h >= 12 ? 'PM' : 'AM';
+                h = h % 12;
+                h = h ? h : 12;
+                return h + ":" + m + " " + ampm;
+            }
+
+            document.getElementById("displaySignal").innerText = formatTime(signalDate);
+            document.getElementById("zoneStart").innerText = formatTime(startZone);
+            document.getElementById("zoneEnd").innerText = formatTime(endZone);
+            document.getElementById("resultArea").style.display = "block";
+            
+            var btn = document.getElementById("copyButton");
+            btn.innerHTML = '<i class="fa-solid fa-check"></i> SIGNAL READY';
+            btn.style.background = "rgba(0, 242, 255, 0.2)"; 
+            btn.style.color = "#00f2ff";
+            btn.style.borderColor = "#00f2ff";
+        }
+        function manualCopy() {
+            var signal = document.getElementById("displaySignal").innerText;
+            var start = document.getElementById("zoneStart").innerText;
+            var end = document.getElementById("zoneEnd").innerText;
+            var textToCopy = `🚨 *AVIATOR SIGNAL PRO* 🚨\n\n` +
+                             `🎯 Next Odd Time: ${signal}\n` +
+                             `🕒 Zone: ${start} To ${end}\n\n` +
+                             `🔥 *විනාඩි හතර තුළ Bet කරන්න*`;
+            var textArea = document.createElement("textarea");
+            textArea.value = textToCopy;
+            textArea.style.position = "fixed";
+            textArea.style.left = "-9999px";
+            document.body.appendChild(textArea);
+            textArea.select();
+            textArea.setSelectionRange(0, 99999);
+            try { 
+                document.execCommand('copy'); 
+                var btn = document.getElementById("copyButton"); 
+                btn.innerHTML = '<i class="fa-solid fa-check-double"></i> COPIED TO CLIPBOARD'; 
+                setTimeout(() => {
+                    btn.innerHTML = '<i class="fa-regular fa-copy"></i> COPY SIGNAL DATA';
+                    btn.style.background = "rgba(255, 255, 255, 0.05)";
+                    btn.style.color = "white";
+                    btn.style.borderColor = "rgba(255,255,255,0.1)";
+                }, 2000);
+            } catch (err) { alert("Manual Copy Required"); }
+            document.body.removeChild(textArea);
+        }
+    </script>
+</body>
+</html>
+e="display:block; background:#25D366; color:#fff; text-decoration:none; padding:10px; border-radius:6px; font-weight:bold; font-size:13px; margin-bottom:10px;">
             <i class="fab fa-whatsapp"></i> Send ID to Admin
         </a>
         <button class="btn-logout" onclick="auth.signOut(); location.reload();">EXIT SYSTEM</button>

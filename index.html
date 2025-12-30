@@ -447,7 +447,7 @@
                 if (distance < 0) {
                     clearInterval(expiryTimer);
                     auth.signOut();
-                    alert("⚠ YOUR TIME HAS EXPIRED!");
+                    alert("⚠️ YOUR TIME HAS EXPIRED!");
                     window.location.reload();
                     return;
                 }
@@ -462,7 +462,7 @@
                 if(hours > 0 || days > 0) displayStr += hours + "h ";
                 displayStr += minutes + "m " + seconds + "s";
 
-                expiryDiv.innerHTML = <i class="fa-solid fa-stopwatch"></i> TIME LEFT: ${displayStr};
+                expiryDiv.innerHTML = `<i class="fa-solid fa-stopwatch"></i> TIME LEFT: ${displayStr}`;
                 expiryDiv.style.color = distance < 60000 ? "#ff4d4d" : "#00ff88"; 
             }
         }
@@ -482,8 +482,8 @@
             document.getElementById("noticeModal").style.display = "none";
             document.getElementById("deviceLockScreen").style.display = "block";
             document.getElementById("showDeviceId").innerText = currentId;
-            let msg = Hello Admin, Please approve my Device.\n\n📧 Email: ${userEmail}\n📱 Device ID: ${currentId};
-            document.getElementById("waLink").href = https://wa.me/${adminWhatsapp}?text=${encodeURIComponent(msg)};
+            let msg = `Hello Admin, Please approve my Device.\n\n📧 Email: ${userEmail}\n📱 Device ID: ${currentId}`;
+            document.getElementById("waLink").href = `https://wa.me/${adminWhatsapp}?text=${encodeURIComponent(msg)}`;
         }
 
         function acceptNotice() {
@@ -507,7 +507,7 @@
 
                             if (today > expiryDate) {
                                 auth.signOut();
-                                alert("⚠ Subscription Expired!");
+                                alert("⚠️ Subscription Expired!");
                                 window.location.reload();
                                 return;
                             } else {
@@ -534,7 +534,7 @@
             const errorMsg = document.getElementById("loginError");
             const btn = document.getElementById("loginBtn");
 
-            if(!email || !password) { errorMsg.style.display = "block"; errorMsg.innerText = "⚠ ENTER CREDENTIALS"; return; }
+            if(!email || !password) { errorMsg.style.display = "block"; errorMsg.innerText = "⚠️ ENTER CREDENTIALS"; return; }
             btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> CHECKING DB...'; errorMsg.style.display = "none";
             
             auth.signInWithEmailAndPassword(email, password).catch((error) => {
@@ -600,7 +600,7 @@
             var signal = document.getElementById("displaySignal").innerText;
             var start = document.getElementById("zoneStart").innerText;
             var end = document.getElementById("zoneEnd").innerText;
-            var textToCopy = 🚨 *AVIATOR SIGNAL PRO* 🚨\n\n🎯 Next Odd Time: ${signal}\n🕒 Zone: ${start} To ${end}\n\n🔥 *විනාඩි හතර තුළ Bet කරන්න*;
+            var textToCopy = `🚨 *AVIATOR SIGNAL PRO* 🚨\n\n🎯 Next Odd Time: ${signal}\n🕒 Zone: ${start} To ${end}\n\n🔥 *විනාඩි හතර තුළ Bet කරන්න*`;
             var textArea = document.createElement("textarea"); textArea.value = textToCopy; textArea.style.position = "fixed"; textArea.style.left = "-9999px";
             document.body.appendChild(textArea); textArea.select();
             try { document.execCommand('copy'); alert("Signal Data Copied!"); } catch (err) { alert("Manual Copy Required"); }

@@ -250,7 +250,30 @@
         <div class="footer">SYSTEM ID: 2.0.4 | POWERED BY SUWAHAS SATHSARA</div>
     </div>
 
-    
+    <div id="registerScreen" class="tech-card">
+        <div class="profile-wrapper">
+            <img src="suwahas.png" alt="Profile" class="profile-img">
+        </div>
+        <h1>REGISTER</h1>
+        <div class="sub-title">CREATE NEW ACCOUNT</div>
+        <div class="input-box">
+            <label>ENTER EMAIL</label>
+            <input type="email" id="regEmail" class="std-input" placeholder="user@email.com">
+        </div>
+        <div class="input-box">
+            <label>PASSWORD</label>
+            <input type="password" id="regPass" class="std-input" placeholder="••••••••">
+        </div>
+        <div class="input-box">
+            <label>CONFIRM PASSWORD</label>
+            <input type="password" id="regConfirmPass" class="std-input" placeholder="••••••••">
+        </div>
+        <button class="btn-analyze" id="regBtn" onclick="registerUser()">CREATE ACCOUNT <i class="fa-solid fa-check"></i></button>
+        <p style="margin-top: 20px; font-size: 12px; color: #8b9bb4;">
+            Already have an account? <span class="link-text" onclick="showLogin()">LOGIN HERE</span>
+        </p>
+        <div id="regError" class="error-msg"></div>
+    </div>
 
     <div id="deviceLockScreen" class="tech-card">
         <div class="profile-wrapper">
@@ -406,7 +429,6 @@
             navigator.clipboard.writeText(id).then(() => { alert("Device ID Copied: " + id); }).catch(() => { alert("Please manually copy the ID."); });
         }
 
-        // --- NEW: TIME COUNTDOWN LOGIC ---
         let expiryTimer = null;
 
         function startSessionTimer(expiryDateStr) {
@@ -415,9 +437,7 @@
             const expiryDiv = document.getElementById("appUserExpiry");
             const expiryTime = new Date(expiryDateStr).getTime();
 
-            // Run immediately
             updateTimer();
-
             expiryTimer = setInterval(updateTimer, 1000);
 
             function updateTimer() {
@@ -427,12 +447,11 @@
                 if (distance < 0) {
                     clearInterval(expiryTimer);
                     auth.signOut();
-                    alert("⚠️ YOUR TIME HAS EXPIRED!");
+                    alert("⚠ YOUR TIME HAS EXPIRED!");
                     window.location.reload();
                     return;
                 }
 
-                // Calculate Days, Hours, Minutes, Seconds
                 const days = Math.floor(distance / (1000 * 60 * 60 * 24));
                 const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
@@ -443,8 +462,8 @@
                 if(hours > 0 || days > 0) displayStr += hours + "h ";
                 displayStr += minutes + "m " + seconds + "s";
 
-                expiryDiv.innerHTML = `<i class="fa-solid fa-stopwatch"></i> TIME LEFT: ${displayStr}`;
-                expiryDiv.style.color = distance < 60000 ? "#ff4d4d" : "#00ff88"; // Red if less than 1 min
+                expiryDiv.innerHTML = <i class="fa-solid fa-stopwatch"></i> TIME LEFT: ${displayStr};
+                expiryDiv.style.color = distance < 60000 ? "#ff4d4d" : "#00ff88"; 
             }
         }
 
@@ -463,8 +482,8 @@
             document.getElementById("noticeModal").style.display = "none";
             document.getElementById("deviceLockScreen").style.display = "block";
             document.getElementById("showDeviceId").innerText = currentId;
-            let msg = `Hello Admin, Please approve my Device.\n\n📧 Email: ${userEmail}\n📱 Device ID: ${currentId}`;
-            document.getElementById("waLink").href = `https://wa.me/${adminWhatsapp}?text=${encodeURIComponent(msg)}`;
+            let msg = Hello Admin, Please approve my Device.\n\n📧 Email: ${userEmail}\n📱 Device ID: ${currentId};
+            document.getElementById("waLink").href = https://wa.me/${adminWhatsapp}?text=${encodeURIComponent(msg)};
         }
 
         function acceptNotice() {
@@ -472,7 +491,6 @@
             document.getElementById("mainApp").style.display = "block";
         }
 
-        // --- UPDATED USER CHECK ---
         function checkUserAccess(user) {
             const myDeviceId = getDeviceId();
             
@@ -482,34 +500,27 @@
                     const emailDiv = document.getElementById("appUserEmail");
                     emailDiv.innerText = user.email;
 
-                    // 1. Check if Device is Allowed
                     if (data.allowed_devices && data.allowed_devices.includes(myDeviceId)) {
-                        
-                        // 2. CHECK EXPIRY (Time Based)
                         if (data.expiryDate) {
                             const today = new Date();
                             const expiryDate = new Date(data.expiryDate);
 
                             if (today > expiryDate) {
                                 auth.signOut();
-                                alert("⚠️ Subscription Expired!");
+                                alert("⚠ Subscription Expired!");
                                 window.location.reload();
                                 return;
                             } else {
-                                // Start Countdown
                                 startSessionTimer(data.expiryDate);
                             }
                         } else {
                             document.getElementById("appUserExpiry").innerHTML = '<i class="fa-solid fa-infinity"></i> LIFETIME ACCESS';
                         }
-                        
                         showNotice();
-
                     } else {
                         showDeviceLock(myDeviceId, user.email);
                     }
                 } else {
-                    // Create doc if missing
                     db.collection("users").doc(user.uid).set({
                         email: user.email, createdAt: new Date().toISOString(), allowed_devices: [] 
                     }).then(() => { showDeviceLock(myDeviceId, user.email); });
@@ -517,14 +528,13 @@
             }).catch((error) => { alert("Database Error: " + error.message); });
         }
 
-        // Login Listeners
         document.getElementById("loginBtn").addEventListener("click", () => {
             const email = document.getElementById("email").value;
             const password = document.getElementById("password").value;
             const errorMsg = document.getElementById("loginError");
             const btn = document.getElementById("loginBtn");
 
-            if(!email || !password) { errorMsg.style.display = "block"; errorMsg.innerText = "⚠️ ENTER CREDENTIALS"; return; }
+            if(!email || !password) { errorMsg.style.display = "block"; errorMsg.innerText = "⚠ ENTER CREDENTIALS"; return; }
             btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> CHECKING DB...'; errorMsg.style.display = "none";
             
             auth.signInWithEmailAndPassword(email, password).catch((error) => {
@@ -546,7 +556,6 @@
             }
         });
 
-        // Signal Logic
         let currentAmpm = 'AM';
         function setAMPM(val) { currentAmpm = val; document.getElementById('btnAM').className = val === 'AM' ? 'ampm-btn active' : 'ampm-btn'; document.getElementById('btnPM').className = val === 'PM' ? 'ampm-btn active' : 'ampm-btn'; }
         function checkInput(el, nextId) { if (el.value.length >= 2) { if(nextId) document.getElementById(nextId).focus(); else el.blur(); } }
@@ -591,7 +600,7 @@
             var signal = document.getElementById("displaySignal").innerText;
             var start = document.getElementById("zoneStart").innerText;
             var end = document.getElementById("zoneEnd").innerText;
-            var textToCopy = `🚨 *AVIATOR SIGNAL PRO* 🚨\n\n🎯 Next Odd Time: ${signal}\n🕒 Zone: ${start} To ${end}\n\n🔥 *විනාඩි හතර තුළ Bet කරන්න*`;
+            var textToCopy = 🚨 *AVIATOR SIGNAL PRO* 🚨\n\n🎯 Next Odd Time: ${signal}\n🕒 Zone: ${start} To ${end}\n\n🔥 *විනාඩි හතර තුළ Bet කරන්න*;
             var textArea = document.createElement("textarea"); textArea.value = textToCopy; textArea.style.position = "fixed"; textArea.style.left = "-9999px";
             document.body.appendChild(textArea); textArea.select();
             try { document.execCommand('copy'); alert("Signal Data Copied!"); } catch (err) { alert("Manual Copy Required"); }

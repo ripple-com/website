@@ -200,6 +200,7 @@
         .social-btn { flex: 1; display: flex; align-items: center; justify-content: center; padding: 12px; border-radius: 8px; text-decoration: none; color: white; font-size: 13px; font-weight: 600; transition: 0.3s; border: 1px solid transparent; gap: 8px; font-family: 'Poppins', sans-serif; }
         .yt { background: rgba(255, 0, 0, 0.1); border-color: rgba(255, 0, 0, 0.4); }
         .wa { background: rgba(0, 255, 136, 0.1); border-color: rgba(0, 255, 136, 0.4); }
+        .tg { background: rgba(0, 136, 204, 0.1); border-color: rgba(0, 136, 204, 0.4); }
         
         .footer { margin-top: 25px; font-size: 10px; color: var(--text-muted); letter-spacing: 0.5px; }
         .link-text { color: var(--primary); text-decoration: none; font-weight: bold; cursor: pointer; transition: 0.3s; }
@@ -289,14 +290,11 @@
             </button>
         </div>
         <p style="font-size: 12px; color: #ccc; margin-bottom: 20px; line-height: 1.5;">
-            You don't have permission to access this App. Please send this ID to Admin to approve your device.
+            You don't have permission to access this App. Please send this ID to Admin via Telegram to approve your device.
         </p>
         <div class="social-area">
-            <a id="waLink" href="#" target="_blank" class="social-btn wa">
-                <i class="fab fa-whatsapp"></i> Send to Admin
-            </a>
-            <a href="https://t.me/suwahassathsara" target="_blank" class="social-btn" style="background: rgba(0, 136, 204, 0.1); border: 1px solid rgba(0, 136, 204, 0.4);">
-                <i class="fab fa-telegram"></i> Telegram
+            <a href="https://t.me/suwahassathsara" target="_blank" class="social-btn tg" style="flex: 1; border: 1px solid rgba(0, 136, 204, 0.4);">
+                <i class="fab fa-telegram"></i> SEND TO ADMIN
             </a>
         </div>
         <button class="btn-logout" onclick="auth.signOut(); location.reload();">SIGN OUT</button>
@@ -380,7 +378,6 @@
           appId: "1:656549146292:web:f35944e4ae7b6db943f1e1",
           measurementId: "G-B5N5DG523J"
         };
-        const adminWhatsapp = "94725019800"; 
         
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
@@ -482,8 +479,6 @@
             document.getElementById("noticeModal").style.display = "none";
             document.getElementById("deviceLockScreen").style.display = "block";
             document.getElementById("showDeviceId").innerText = currentId;
-            let msg = `Hello Admin, Please approve my Device.\n\n📧 Email: ${userEmail}\n📱 Device ID: ${currentId}`;
-            document.getElementById("waLink").href = `https://wa.me/${adminWhatsapp}?text=${encodeURIComponent(msg)}`;
         }
 
         function acceptNotice() {

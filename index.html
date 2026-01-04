@@ -282,18 +282,24 @@
         </div>
         <h1>DEVICE LOCK</h1>
         <div class="sub-title">AUTHORIZATION REQUIRED</div>
-        <div style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; border: 1px dashed var(--primary); margin-bottom: 20px;">
-            <div style="font-size: 10px; color: #8b9bb4; margin-bottom: 5px;">YOUR DEVICE ID</div>
-            <div id="showDeviceId" style="font-size: 16px; color: #fff; font-weight: bold; font-family: 'Rajdhani', sans-serif; letter-spacing: 1px; word-break: break-all;">LOADING...</div>
-            <button onclick="copyDeviceId()" style="background: transparent; border: none; color: var(--primary); cursor: pointer; font-size: 12px; margin-top: 8px; padding: 5px 10px; border: 1px solid var(--primary); border-radius: 4px;">
-                <i class="fa-regular fa-copy"></i> TAP TO COPY
+        <div style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; border: 1px dashed var(--primary); margin-bottom: 20px; text-align: left;">
+            <div style="font-size: 10px; color: #8b9bb4; margin-bottom: 5px; text-transform: uppercase;">Registration Details</div>
+            
+            <div style="font-size: 12px; color: #8b9bb4;">Email:</div>
+            <div id="showUserEmail" style="font-size: 14px; color: #fff; font-weight: bold; margin-bottom: 10px;">LOADING...</div>
+            
+            <div style="font-size: 12px; color: #8b9bb4;">Device ID:</div>
+            <div id="showDeviceId" style="font-size: 14px; color: #fff; font-weight: bold; font-family: 'Rajdhani', sans-serif; letter-spacing: 1px; word-break: break-all;">LOADING...</div>
+            
+            <button onclick="copyAuthDetails()" style="width: 100%; background: transparent; border: none; color: var(--primary); cursor: pointer; font-size: 12px; margin-top: 15px; padding: 8px; border: 1px solid var(--primary); border-radius: 4px; font-weight: bold;">
+                <i class="fa-regular fa-copy"></i> COPY EMAIL & ID
             </button>
         </div>
         <p style="font-size: 12px; color: #ccc; margin-bottom: 20px; line-height: 1.5;">
-            You don't have permission to access this App. Please send this ID to Admin via Telegram to approve your device.
+            You don't have permission to access this App. Please send these details to Admin via Telegram to approve your device.
         </p>
         <div class="social-area">
-            <a href="https://t.me/suwahassathsara" target="_blank" class="social-btn tg" style="flex: 1; border: 1px solid rgba(0, 136, 204, 0.4);">
+            <a id="sendToAdminBtn" href="#" target="_blank" class="social-btn tg" style="flex: 1; border: 1px solid rgba(0, 136, 204, 0.4);">
                 <i class="fab fa-telegram"></i> SEND TO ADMIN
             </a>
         </div>
@@ -421,9 +427,17 @@
             return deviceId;
         }
 
-        function copyDeviceId() {
+        // UPDATED COPY LOGIC
+        function copyAuthDetails() {
+            const email = document.getElementById("showUserEmail").innerText;
             const id = document.getElementById("showDeviceId").innerText;
-            navigator.clipboard.writeText(id).then(() => { alert("Device ID Copied: " + id); }).catch(() => { alert("Please manually copy the ID."); });
+            const textToCopy = `Requesting Access:\nEmail: ${email}\nDevice ID: ${id}`;
+            
+            navigator.clipboard.writeText(textToCopy).then(() => { 
+                alert("Email and ID Copied Successfully!"); 
+            }).catch(() => { 
+                alert("Please manually copy the details."); 
+            });
         }
 
         let expiryTimer = null;
@@ -472,13 +486,20 @@
             document.getElementById("noticeModal").style.display = "flex";
         }
 
+        // UPDATED DEVICE LOCK DISPLAY
         function showDeviceLock(currentId, userEmail) {
             document.getElementById("loginScreen").style.display = "none";
             document.getElementById("registerScreen").style.display = "none";
             document.getElementById("mainApp").style.display = "none";
             document.getElementById("noticeModal").style.display = "none";
             document.getElementById("deviceLockScreen").style.display = "block";
+            
             document.getElementById("showDeviceId").innerText = currentId;
+            document.getElementById("showUserEmail").innerText = userEmail;
+
+            // Update Telegram Direct Link
+            const tgMsg = encodeURIComponent(`Hello Admin, Please unlock my device.\nEmail: ${userEmail}\nDevice ID: ${currentId}`);
+            document.getElementById("sendToAdminBtn").href = `https://t.me/suwahassathsara?text=${tgMsg}`;
         }
 
         function acceptNotice() {

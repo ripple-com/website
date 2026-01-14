@@ -1,93 +1,175 @@
-<!DOCTYPE html>
-<html lang="si">
-<head>
+<!DOCTYPE html><html lang="en"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Draughts Scanner Pro</title>
+    <title>ZANTA-MD | Pairing</title>
+    <link rel="stylesheet" href="css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        body { background: #121212; color: white; font-family: sans-serif; text-align: center; padding: 20px; }
-        .wrapper { max-width: 500px; margin: auto; }
-        #view-area { position: relative; width: 100%; aspect-ratio: 1/1; background: #000; border-radius: 12px; border: 3px solid #2ecc71; overflow: hidden; }
-        video { width: 100%; height: 100%; object-fit: cover; }
-        canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-        .btn-scan { background: #e67e22; color: white; padding: 15px; border: none; border-radius: 8px; width: 100%; font-size: 18px; cursor: pointer; margin-top: 15px; }
-        #log-panel { margin-top: 20px; padding: 15px; background: #1e1e1e; border-radius: 10px; }
-        .move-display { font-size: 35px; color: #f1c40f; font-weight: bold; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background: #000; height: 100vh; overflow: hidden; display: flex; justify-content: center; align-items: center; position: relative; }
+
+        /* ✨ Light Blue Space Background */
+        .stars-container { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; 
+            background: radial-gradient(circle at center, #0a1a2d 0%, #000000 100%); 
+        }
+        .star { position: absolute; background: #b6e3ff; border-radius: 50%; opacity: 0.6; animation: move linear infinite; }
+        @keyframes move { from { transform: translateY(100vh); opacity: 0; } to { transform: translateY(-10vh); opacity: 0.8; } }
+
+        /* 💎 Ultra Glass Box */
+        .glass-box {
+            position: relative;
+            z-index: 10;
+            width: 90%;
+            max-width: 400px;
+            padding: 50px 30px;
+            background: rgba(0, 212, 255, 0.03); 
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(182, 227, 255, 0.2);
+            border-radius: 40px;
+            box-shadow: 0 15px 35px rgba(0, 191, 255, 0.15);
+            text-align: center;
+            color: #fff;
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: #00d4ff;
+            text-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        p { font-size: 0.85rem; color: rgba(255, 255, 255, 0.6); margin-bottom: 25px; }
+
+        /* ⌨️ Input Styling */
+        input {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            font-size: 1rem;
+            text-align: center;
+            outline: none;
+            transition: 0.3s;
+        }
+        input:focus {
+            border-color: #00d4ff;
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* 🔘 Button Styling */
+        button {
+            width: 100%;
+            padding: 15px;
+            background: #00d4ff;
+            color: #000;
+            border: none;
+            border-radius: 15px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.4s;
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
+        }
+        button:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 25px rgba(0, 212, 255, 0.6);
+            letter-spacing: 1px;
+        }
+
+        /* 🔢 Code Display */
+        #code {
+            margin-top: 25px;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #fff;
+            text-shadow: 0 0 10px #00d4ff;
+            letter-spacing: 5px;
+            min-height: 40px;
+        }
+
+        .home-link {
+            display: inline-block;
+            margin-top: 30px;
+            color: #00d4ff;
+            text-decoration: none;
+            font-size: 0.8rem;
+            border-bottom: 1px solid transparent;
+            transition: 0.3s;
+            opacity: 0.7;
+        }
+        .home-link:hover { opacity: 1; border-color: #00d4ff; }
+
     </style>
 </head>
 <body>
 
-<div class="wrapper">
-    <h2>AI සජීවී දාම් ස්කෑනර්</h2>
-    
-    <div id="view-area">
-        <video id="webcam" autoplay playsinline></video>
-        <canvas id="overlay"></canvas>
-    </div>
+    <div class="stars-container" id="stars"></div>
 
-    <button class="btn-scan" onclick="runAnalysis()">හොඳම ඇදීම සොයන්න</button>
-
-    <div id="log-panel">
-        <div id="status">තත්ත්වය: සූදානම්</div>
-        <div id="best-move" class="move-display">---</div>
-    </div>
-</div>
-
-<script>
-    const video = document.getElementById('webcam');
-    const canvas = document.getElementById('overlay');
-    const ctx = canvas.getContext('2d');
-    const statusEl = document.getElementById('status');
-    const moveEl = document.getElementById('best-move');
-
-    // කැමරාව පණගැන්වීම
-    navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
-        .then(stream => {
-            video.srcObject = stream;
-            video.addEventListener('loadedmetadata', () => {
-                canvas.width = video.videoWidth;
-                canvas.height = video.videoHeight;
-                drawGrid();
-            });
-        })
-        .catch(err => statusEl.innerText = "කැමරා දෝෂයකි!");
-
-    function drawGrid() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.strokeStyle = "rgba(46, 204, 113, 0.5)";
-        const size = canvas.width / 10;
-        for(let i=0; i<=10; i++) {
-            ctx.moveTo(i*size, 0); ctx.lineTo(i*size, canvas.height);
-            ctx.moveTo(0, i*size); ctx.lineTo(canvas.width, i*size);
-        }
-        ctx.stroke();
-        requestAnimationFrame(drawGrid);
-    }
-
-    async function runAnalysis() {
-        statusEl.innerText = "දත්ත ලබා ගනිමින්...";
-        // ආරම්භක අවස්ථාව සඳහා FEN එක
-        const fen = "W:W31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50:B1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20";
+    <div class="glass-box">
+        <h2>ZANTA-MD</h2>
+        <p>Enter your number with country code</p>
         
-        // විකල්ප Proxy එකක් - Corsproxy.io
-        const url = `https://corsproxy.io/?${encodeURIComponent('https://lidraughts.org/api/cloud-eval?fen=' + fen + '&variant=international')}`;
+        <input type="number" id="num" placeholder="e.g. 94743404814">
+        
+        <button onclick="getPair()">GET PAIR CODE</button>
+        
+        <div id="code"></div>
 
-        try {
-            const res = await fetch(url);
-            if (!res.ok) throw new Error("API කාර්යබහුලයි");
-            const data = await res.json();
+        <a href="index.html" class="home-link">← Back to Home</a>
+    </div>
 
-            if (data.pvs && data.pvs[0]) {
-                moveEl.innerText = data.pvs[0].moves.split(' ')[0];
-                statusEl.innerText = "සාර්ථකයි!";
-            } else {
-                statusEl.innerText = "දත්ත හමු නොවීය.";
-            }
-        } catch (err) {
-            statusEl.innerText = "සම්බන්ධතා දෝෂයකි. නැවත උත්සාහ කරන්න.";
-            console.error(err);
+    <audio id="bgMusic" loop="">
+        <source src="https://files.catbox.moe/5zx7hg.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // Stars Logic
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 80; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            const size = Math.random() * 2.5 + 'px';
+            star.style.width = size; star.style.height = size;
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDuration = Math.random() * 5 + 3 + 's';
+            starsContainer.appendChild(star);
         }
-    }
-</script>
-</body>
-</html>
+
+        // Pairing Logic (As per your request)
+        async function getPair() {
+            const num = document.getElementById('num').value;
+            const codeDiv = document.getElementById('code');
+            if(!num) return alert("Please enter your number!");
+            
+            codeDiv.innerText = "WAITING...";
+            codeDiv.style.fontSize = "1rem";
+            codeDiv.style.letterSpacing = "1px";
+
+            try {
+                const res = await fetch(`/code?number=${num}`);
+                const data = await res.json();
+                
+                codeDiv.style.fontSize = "1.8rem";
+                codeDiv.style.letterSpacing = "5px";
+                codeDiv.innerText = data.code || "ERROR";
+            } catch (error) {
+                codeDiv.innerText = "ERROR";
+            }
+        }
+
+        // Music Trigger
+        window.addEventListener('click', () => {
+            document.getElementById('bgMusic').play();
+        }, { once: true });
+    </script>
+
+
+</body></html>

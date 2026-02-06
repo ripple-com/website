@@ -246,55 +246,8 @@
             <input type="password" id="password" class="std-input" placeholder="••••••••">
         </div>
         <button class="btn-analyze" id="loginBtn">INITIALIZE SESSION <i class="fa-solid fa-arrow-right"></i></button>
-        <p style="margin-top: 20px; font-size: 12px; color: #8b9bb4;">
-            Don't have an account? <span class="link-text" onclick="showRegister()">REGISTER HERE</span>
-        </p>
         <div id="loginError" class="error-msg"></div>
         <div class="footer">SYSTEM ID: 2.0.4 | POWERED BY SUWAHAS SATHSARA</div>
-    </div>
-
-    <div id="registerScreen" class="tech-card">
-        <div class="profile-wrapper">
-            <img src="suwahas.png" alt="Profile" class="profile-img">
-        </div>
-        <h1>REGISTER</h1>
-        <div class="sub-title">CREATE NEW ACCOUNT</div>
-        
-        <div class="input-box">
-            <label>SELECT BETTING SITE</label>
-            <select id="regSite" class="std-input" style="appearance: none;">
-                <option value="" disabled selected>CHOOSE SITE</option>
-                <option value="1xbet">1XBET</option>
-                <option value="888starz">888STARZ</option>
-                <option value="dbbet">DBBET</option>
-                <option value="wowbet">WOWBET</option>
-                <option value="paripulse">PARIPULSE</option>
-                <option value="coldbet">COLDBET</option>
-            </select>
-        </div>
-
-        <div class="input-box">
-            <label>BETTING ID</label>
-            <input type="text" id="regBetId" class="std-input" placeholder="Enter Site ID">
-        </div>
-
-        <div class="input-box">
-            <label>ENTER EMAIL</label>
-            <input type="email" id="regEmail" class="std-input" placeholder="user@email.com">
-        </div>
-        <div class="input-box">
-            <label>PASSWORD</label>
-            <input type="password" id="regPass" class="std-input" placeholder="••••••••">
-        </div>
-        <div class="input-box">
-            <label>CONFIRM PASSWORD</label>
-            <input type="password" id="regConfirmPass" class="std-input" placeholder="••••••••">
-        </div>
-        <button class="btn-analyze" id="regBtn" onclick="registerUser()">CREATE ACCOUNT <i class="fa-solid fa-check"></i></button>
-        <p style="margin-top: 20px; font-size: 12px; color: #8b9bb4;">
-            Already have an account? <span class="link-text" onclick="showLogin()">LOGIN HERE</span>
-        </p>
-        <div id="regError" class="error-msg"></div>
     </div>
 
     <div id="deviceLockScreen" class="tech-card">
@@ -304,7 +257,7 @@
         <h1>DEVICE LOCK</h1>
         <div class="sub-title">AUTHORIZATION REQUIRED</div>
         <div style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; border: 1px dashed var(--primary); margin-bottom: 20px; text-align: left;">
-            <div style="font-size: 10px; color: #8b9bb4; margin-bottom: 5px; text-transform: uppercase;">Registration Details</div>
+            <div style="font-size: 10px; color: #8b9bb4; margin-bottom: 5px; text-transform: uppercase;">User Details</div>
             
             <div style="font-size: 12px; color: #8b9bb4;">Email:</div>
             <div id="showUserEmail" style="font-size: 14px; color: #fff; font-weight: bold; margin-bottom: 10px;">LOADING...</div>
@@ -410,52 +363,6 @@
         const auth = firebase.auth();
         const db = firebase.firestore();
 
-        // UI Helpers
-        function showRegister() { document.getElementById("loginScreen").style.display = "none"; document.getElementById("registerScreen").style.display = "block"; }
-        function showLogin() { document.getElementById("registerScreen").style.display = "none"; document.getElementById("loginScreen").style.display = "block"; }
-        
-        // Registration Logic with Telegram Notification
-        function registerUser() {
-            const site = document.getElementById("regSite").value;
-            const betId = document.getElementById("regBetId").value;
-            const email = document.getElementById("regEmail").value;
-            const pass = document.getElementById("regPass").value;
-            const confirmPass = document.getElementById("regConfirmPass").value;
-            const btn = document.getElementById("regBtn");
-            const msg = document.getElementById("regError");
-
-            if(!site || !betId || !email || !pass || !confirmPass) { msg.style.display = 'block'; msg.innerText = "Please fill all fields!"; return; }
-            if(pass !== confirmPass) { msg.style.display = 'block'; msg.innerText = "Passwords do not match!"; return; }
-            if(pass.length < 6) { msg.style.display = 'block'; msg.innerText = "Password must be 6+ chars"; return; }
-
-            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> CREATING...'; msg.style.display = 'none';
-
-            auth.createUserWithEmailAndPassword(email, pass).then((cred) => {
-                // Save info to Database
-                return db.collection("users").doc(cred.user.uid).set({
-                    email: email,
-                    bettingSite: site,
-                    bettingId: betId,
-                    createdAt: new Date().toISOString(),
-                    allowed_devices: [],
-                    deviceId: getDeviceId()
-                });
-            }).then(() => {
-                // SEND TO TELEGRAM BOT
-                const botToken = "8044947548:AAFMqhrt2A5qEt-lK92n39_8sJS014i_5U0"; // ENTER YOUR BOT TOKEN HERE
-                const chatId = "6877320092";     // ENTER YOUR CHAT ID HERE
-                const text = `🚀 *NEW USER REGISTERED*\n\n📧 Email: ${email}\n🎮 Site: ${site}\n🆔 Bet ID: ${betId}\n📱 Device: ${getDeviceId()}`;
-                
-                fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(text)}&parse_mode=Markdown`)
-                .finally(() => {
-                    alert("Account Created Successfully!");
-                });
-
-            }).catch((err) => {
-                msg.style.display = 'block'; msg.innerText = err.message; btn.innerHTML = 'CREATE ACCOUNT <i class="fa-solid fa-check"></i>';
-            });
-        }
-
         function getDeviceId() {
             let deviceId = localStorage.getItem("aviator_device_id");
             if (!deviceId) {
@@ -481,12 +388,8 @@
 
         function startSessionTimer(expiryDateStr) {
             if(expiryTimer) clearInterval(expiryTimer);
-            
             const expiryDiv = document.getElementById("appUserExpiry");
             const expiryTime = new Date(expiryDateStr).getTime();
-
-            updateTimer();
-            expiryTimer = setInterval(updateTimer, 1000);
 
             function updateTimer() {
                 const now = new Date().getTime();
@@ -513,11 +416,12 @@
                 expiryDiv.innerHTML = `<i class="fa-solid fa-stopwatch"></i> TIME LEFT: ${displayStr}`;
                 expiryDiv.style.color = distance < 60000 ? "#ff4d4d" : "#00ff88"; 
             }
+            updateTimer();
+            expiryTimer = setInterval(updateTimer, 1000);
         }
 
         function showNotice() {
             document.getElementById("loginScreen").style.display = "none";
-            document.getElementById("registerScreen").style.display = "none";
             document.getElementById("deviceLockScreen").style.display = "none"; 
             document.getElementById("mainApp").style.display = "none";
             document.getElementById("noticeModal").style.display = "flex";
@@ -525,7 +429,6 @@
 
         function showDeviceLock(currentId, userEmail) {
             document.getElementById("loginScreen").style.display = "none";
-            document.getElementById("registerScreen").style.display = "none";
             document.getElementById("mainApp").style.display = "none";
             document.getElementById("noticeModal").style.display = "none";
             document.getElementById("deviceLockScreen").style.display = "block";
@@ -544,19 +447,15 @@
 
         function checkUserAccess(user) {
             const myDeviceId = getDeviceId();
-            
             db.collection("users").doc(user.uid).get().then((doc) => {
                 if (doc.exists) {
                     const data = doc.data();
-                    const emailDiv = document.getElementById("appUserEmail");
-                    emailDiv.innerText = user.email;
+                    document.getElementById("appUserEmail").innerText = user.email;
 
                     if (data.allowed_devices && data.allowed_devices.includes(myDeviceId)) {
                         if (data.expiryDate) {
                             const today = new Date();
-                            const expiryDate = new Date(data.expiryDate);
-
-                            if (today > expiryDate) {
+                            if (today > new Date(data.expiryDate)) {
                                 auth.signOut();
                                 alert("⚠️ Subscription Expired!");
                                 window.location.reload();
@@ -600,7 +499,6 @@
             if (user) { checkUserAccess(user); } 
             else { 
                 document.getElementById("loginScreen").style.display = "block";
-                document.getElementById("registerScreen").style.display = "none";
                 document.getElementById("deviceLockScreen").style.display = "none";
                 document.getElementById("noticeModal").style.display = "none";
                 document.getElementById("mainApp").style.display = "none";

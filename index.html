@@ -170,41 +170,40 @@
             border: 1px solid #ff4d4d; border-radius: 8px; color: #ff4d4d; 
             font-size: 12px; font-weight: 600; cursor: pointer; margin-top: 25px; transition: 0.3s;
         }
-        .btn-logout:hover { background: rgba(255, 0, 0, 0.2); }
         
         .error-msg { color: #ff4d4d; font-size: 13px; margin-top: 15px; display: none; font-weight: bold; background: rgba(255,0,0,0.1); padding: 10px; border-radius: 8px; border: 1px solid rgba(255,0,0,0.3); }
         
         /* Modal */
         #noticeModal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.95); z-index: 9999; display: none; justify-content: center; align-items: center; padding: 20px; }
-        .notice-content { background: #0b111a; border: 1px solid var(--primary); padding: 30px 20px; border-radius: 15px; width: 100%; max-width: 380px; text-align: center; box-shadow: 0 0 50px rgba(0, 242, 255, 0.2); animation: slideUp 0.4s ease-out; position: relative; }
+        .notice-content { background: #0b111a; border: 1px solid var(--primary); padding: 30px 20px; border-radius: 15px; width: 100%; max-width: 380px; text-align: center; box-shadow: 0 0 50px rgba(0, 242, 255, 0.2); animation: slideUp 0.4s ease-out; }
         .notice-title { color: var(--primary); font-weight: 800; font-size: 18px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; font-family: 'Rajdhani', sans-serif; }
-        .notice-text { font-size: 14px; color: #ccc; line-height: 1.7; margin-bottom: 25px; text-align: center; font-weight: 400; }
-        .signature { color: #ffcc00; font-weight: 700; margin-top: 15px; display: block; font-size: 12px; letter-spacing: 0.5px; }
-        .btn-notice { width: 100%; padding: 14px; background: var(--secondary); color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 14px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); font-family: 'Rajdhani', sans-serif; text-transform: uppercase;}
+        .notice-text { font-size: 14px; color: #ccc; line-height: 1.7; margin-bottom: 25px; }
+        .signature { color: #ffcc00; font-weight: 700; margin-top: 15px; display: block; font-size: 12px; }
+        .btn-notice { width: 100%; padding: 14px; background: var(--secondary); color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-family: 'Rajdhani', sans-serif; text-transform: uppercase;}
 
         .clock-wrapper { display: flex; align-items: stretch; gap: 10px; }
         .clock-container { flex: 2; display: flex; justify-content: center; align-items: center; background: rgba(0, 0, 0, 0.3); border-radius: 8px; padding: 10px; border: 1px solid rgba(255, 255, 255, 0.1); }
-        .clock-input { background: transparent; border: none; color: white; font-size: 38px; font-weight: 600; width: 55px; text-align: center; outline: none; font-family: 'Rajdhani', sans-serif; padding: 0; margin: 0; }
-        .clock-colon { font-size: 30px; margin: 0 2px; color: var(--primary); animation: blink 1s infinite; }
+        .clock-input { background: transparent; border: none; color: white; font-size: 38px; font-weight: 600; width: 55px; text-align: center; outline: none; font-family: 'Rajdhani', sans-serif; }
+        .clock-colon { font-size: 30px; color: var(--primary); animation: blink 1s infinite; }
         .ampm-toggle { flex: 1; display: flex; flex-direction: column; background: rgba(0, 0, 0, 0.3); border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1); overflow: hidden; }
-        .ampm-btn { flex: 1; border: none; background: transparent; color: #555; font-weight: bold; cursor: pointer; transition: 0.3s; font-size: 14px; font-family: 'Rajdhani', sans-serif; }
-        .ampm-btn.active { background: var(--primary); color: #000; box-shadow: 0 0 15px rgba(0, 242, 255, 0.4); }
+        .ampm-btn { flex: 1; border: none; background: transparent; color: #555; font-weight: bold; cursor: pointer; font-family: 'Rajdhani', sans-serif; }
+        .ampm-btn.active { background: var(--primary); color: #000; }
         
-        #resultArea { display: none; margin-top: 25px; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 20px; animation: fadeIn 0.5s ease; }
+        #resultArea { display: none; margin-top: 25px; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 20px; }
         .result-panel { background: rgba(0, 242, 255, 0.05); border-radius: 10px; padding: 15px; margin-bottom: 10px; border: 1px solid var(--border); }
-        .time-display { font-size: 36px; font-weight: 800; color: var(--primary); text-shadow: 0 0 20px rgba(0, 242, 255, 0.4); margin: 5px 0; font-family: 'Rajdhani', sans-serif; }
-        .zone-display { font-size: 20px; color: #ffd700; font-weight: 600; font-family: 'Rajdhani', sans-serif; letter-spacing: 1px;}
+        .time-display { font-size: 36px; font-weight: 800; color: var(--primary); font-family: 'Rajdhani', sans-serif; }
+        .zone-display { font-size: 20px; color: #ffd700; font-weight: 600; font-family: 'Rajdhani', sans-serif; }
+        .btn-copy { width: 100%; padding: 12px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; font-family: 'Rajdhani', sans-serif; }
         
         .social-area { margin-top: 25px; padding-top: 15px; border-top: 1px solid rgba(255, 255, 255, 0.1); display: flex; gap: 10px; justify-content: center; }
-        .social-btn { flex: 1; display: flex; align-items: center; justify-content: center; padding: 12px; border-radius: 8px; text-decoration: none; color: white; font-size: 13px; font-weight: 600; transition: 0.3s; border: 1px solid transparent; gap: 8px; font-family: 'Poppins', sans-serif; }
+        .social-btn { flex: 1; display: flex; align-items: center; justify-content: center; padding: 12px; border-radius: 8px; text-decoration: none; color: white; font-size: 13px; border: 1px solid transparent; gap: 8px; }
         .yt { background: rgba(255, 0, 0, 0.1); border-color: rgba(255, 0, 0, 0.4); }
         .wa { background: rgba(0, 255, 136, 0.1); border-color: rgba(0, 255, 136, 0.4); }
         .tg { background: rgba(0, 136, 204, 0.1); border-color: rgba(0, 136, 204, 0.4); }
         
-        .footer { margin-top: 25px; font-size: 10px; color: var(--text-muted); letter-spacing: 0.5px; }
+        .footer { margin-top: 25px; font-size: 10px; color: var(--text-muted); }
 
         @keyframes blink { 50% { opacity: 0; } }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
     </style>
 </head>
@@ -251,18 +250,16 @@
         <h1>DEVICE LOCK</h1>
         <div class="sub-title">AUTHORIZATION REQUIRED</div>
         <div style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; border: 1px dashed var(--primary); margin-bottom: 20px; text-align: left;">
-            <div style="font-size: 10px; color: #8b9bb4; margin-bottom: 5px; text-transform: uppercase;">Details</div>
             <div style="font-size: 12px; color: #8b9bb4;">Email:</div>
             <div id="showUserEmail" style="font-size: 14px; color: #fff; font-weight: bold; margin-bottom: 10px;">LOADING...</div>
             <div style="font-size: 12px; color: #8b9bb4;">Device ID:</div>
-            <div id="showDeviceId" style="font-size: 14px; color: #fff; font-weight: bold; font-family: 'Rajdhani', sans-serif; letter-spacing: 1px; word-break: break-all;">LOADING...</div>
-            
-            <button onclick="copyAuthDetails()" style="width: 100%; background: transparent; border: none; color: var(--primary); cursor: pointer; font-size: 12px; margin-top: 15px; padding: 8px; border: 1px solid var(--primary); border-radius: 4px; font-weight: bold;">
-                <i class="fa-regular fa-copy"></i> COPY DETAILS
+            <div id="showDeviceId" style="font-size: 14px; color: #fff; font-weight: bold; letter-spacing: 1px; word-break: break-all;">LOADING...</div>
+            <button onclick="copyAuthDetails()" style="width: 100%; background: transparent; border: 1px solid var(--primary); color: var(--primary); cursor: pointer; font-size: 12px; margin-top: 15px; padding: 8px; border-radius: 4px; font-weight: bold;">
+                <i class="fa-regular fa-copy"></i> COPY EMAIL & ID
             </button>
         </div>
-        <p style="font-size: 12px; color: #ccc; margin-bottom: 20px; line-height: 1.5;">
-            Please contact Admin via Telegram to approve your device.
+        <p style="font-size: 12px; color: #ccc; margin-bottom: 20px;">
+            Please send these details to Admin via Telegram to approve your device.
         </p>
         <div class="social-area">
             <a id="sendToAdminBtn" href="#" target="_blank" class="social-btn tg">
@@ -279,7 +276,7 @@
         <div class="profile-section">
             <img src="suwahas.png" class="profile-pic-small" alt="User">
             <div class="profile-details">
-                <div id="appUserEmail" class="profile-email">Loading User...</div>
+                <div id="appUserEmail" class="profile-email">Loading...</div>
                 <div id="appUserExpiry" class="profile-status"><i class="fa-solid fa-spinner fa-spin"></i> CHECKING</div>
             </div>
         </div>
@@ -293,36 +290,41 @@
             <label>SYSTEM TIME INPUT</label>
             <div class="clock-wrapper">
                 <div class="clock-container">
-                    <input type="number" id="inputHour" class="clock-input" placeholder="00">
+                    <input type="number" id="inputHour" class="clock-input" placeholder="00" oninput="checkInput(this, 'inputMinute')">
                     <span class="clock-colon">:</span>
-                    <input type="number" id="inputMinute" class="clock-input" placeholder="00">
+                    <input type="number" id="inputMinute" class="clock-input" placeholder="00" oninput="checkInput(this, null)">
                 </div>
                 <div class="ampm-toggle">
-                    <button class="ampm-btn active" id="btnAM">AM</button>
-                    <button class="ampm-btn" id="btnPM">PM</button>
+                    <button class="ampm-btn active" id="btnAM" onclick="setAMPM('AM')">AM</button>
+                    <button class="ampm-btn" id="btnPM" onclick="setAMPM('PM')">PM</button>
                 </div>
             </div>
         </div>
 
-        <button class="btn-analyze">CALCULATE SIGNAL <i class="fa-solid fa-bolt"></i></button>
+        <button class="btn-analyze" onclick="calculateSignal()">CALCULATE SIGNAL <i class="fa-solid fa-bolt"></i></button>
 
         <div id="resultArea">
             <div class="result-panel">
-                <div style="font-size: 10px; color: #8b9bb4; letter-spacing: 2px; text-transform: uppercase;">Predicted Signal Time</div>
+                <div style="font-size: 10px; color: #8b9bb4; text-transform: uppercase;">Predicted Signal Time</div>
                 <div class="time-display" id="displaySignal">00:00 AM</div>
             </div>
+            <div class="result-panel" style="border-color: #ffd700;">
+                <div style="font-size: 10px; color: #ffd700; text-transform: uppercase;">Active Zone (4 MIN)</div>
+                <div class="zone-display">
+                    <span id="zoneStart">00:00</span> - <span id="zoneEnd">00:00</span>
+                </div>
+            </div>
+            <button class="btn-copy" onclick="manualCopy()" id="copyButton">
+                <i class="fa-regular fa-copy"></i> COPY SIGNAL DATA
+            </button>
         </div>
 
         <div class="social-area">
-            <a href="https://www.youtube.com/@suwahas-sathsara-chandrasiri" target="_blank" class="social-btn yt">
-                <i class="fab fa-youtube"></i> Channel
-            </a>
-            <a href="https://chat.whatsapp.com/BsT6wzn6FjkKnBVP0FvHJp" target="_blank" class="social-btn wa">
-                <i class="fab fa-whatsapp"></i> Group
-            </a>
+            <a href="https://www.youtube.com/@suwahas-sathsara-chandrasiri" target="_blank" class="social-btn yt"><i class="fab fa-youtube"></i></a>
+            <a href="https://chat.whatsapp.com/BsT6wzn6FjkKnBVP0FvHJp" target="_blank" class="social-btn wa"><i class="fab fa-whatsapp"></i></a>
         </div>
 
-        <button class="btn-logout" id="logoutBtn">TERMINATE SESSION <i class="fa-solid fa-power-off"></i></button>
+        <button class="btn-logout" id="logoutBtn" style="color:#ff4d4d; border: 1px solid #ff4d4d;">TERMINATE SESSION <i class="fa-solid fa-power-off"></i></button>
     </div>
 
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
@@ -344,7 +346,6 @@
         const auth = firebase.auth();
         const db = firebase.firestore();
 
-        // Device ID logic
         function getDeviceId() {
             let deviceId = localStorage.getItem("aviator_device_id");
             if (!deviceId) {
@@ -354,17 +355,31 @@
             return deviceId;
         }
 
-        // UI View Logic
-        function showView(id) {
-            document.querySelectorAll('.tech-card').forEach(el => el.style.display = 'none');
-            document.getElementById('noticeModal').style.display = 'none';
-            if(id === 'noticeModal') document.getElementById(id).style.display = 'flex';
-            else if(id) document.getElementById(id).style.display = 'block';
+        function copyAuthDetails() {
+            const email = document.getElementById("showUserEmail").innerText;
+            const id = document.getElementById("showDeviceId").innerText;
+            navigator.clipboard.writeText(`Email: ${email}\nDevice ID: ${id}`);
+            alert("Copied!");
         }
 
-        function acceptNotice() { showView('mainApp'); }
+        function showNotice() {
+            document.querySelectorAll('.tech-card').forEach(el => el.style.display = 'none');
+            document.getElementById("noticeModal").style.display = "flex";
+        }
 
-        // Auth Listener
+        function acceptNotice() {
+            document.getElementById("noticeModal").style.display = "none";
+            document.getElementById("mainApp").style.display = "block";
+        }
+
+        function showDeviceLock(currentId, userEmail) {
+            document.querySelectorAll('.tech-card').forEach(el => el.style.display = 'none');
+            document.getElementById("deviceLockScreen").style.display = "block";
+            document.getElementById("showDeviceId").innerText = currentId;
+            document.getElementById("showUserEmail").innerText = userEmail;
+            document.getElementById("sendToAdminBtn").href = `https://t.me/suwahassathsara?text=Requesting Access:%0AEmail: ${userEmail}%0ADeviceID: ${currentId}`;
+        }
+
         auth.onAuthStateChanged((user) => {
             if (user) {
                 const myDeviceId = getDeviceId();
@@ -372,44 +387,59 @@
                     if (doc.exists) {
                         const data = doc.data();
                         document.getElementById("appUserEmail").innerText = user.email;
-                        
                         if (data.allowed_devices && data.allowed_devices.includes(myDeviceId)) {
-                            showView('noticeModal');
-                            document.getElementById("appUserExpiry").innerHTML = 'AUTHORIZED';
+                            document.getElementById("appUserExpiry").innerHTML = 'ACTIVE SESSION';
+                            showNotice();
                         } else {
-                            document.getElementById("showDeviceId").innerText = myDeviceId;
-                            document.getElementById("showUserEmail").innerText = user.email;
-                            const tgMsg = encodeURIComponent(`Hello Admin, Approve my device.\nEmail: ${user.email}\nID: ${myDeviceId}`);
-                            document.getElementById("sendToAdminBtn").href = `https://t.me/suwahassathsara?text=${tgMsg}`;
-                            showView('deviceLockScreen');
+                            showDeviceLock(myDeviceId, user.email);
                         }
-                    } else {
-                        showView('deviceLockScreen');
                     }
                 });
             } else {
-                showView('loginScreen');
+                document.querySelectorAll('.tech-card').forEach(el => el.style.display = 'none');
+                document.getElementById("loginScreen").style.display = "block";
             }
         });
 
-        // Login Action
         document.getElementById("loginBtn").addEventListener("click", () => {
             const email = document.getElementById("email").value;
             const password = document.getElementById("password").value;
-            const errorMsg = document.getElementById("loginError");
-            
-            if(!email || !password) { errorMsg.style.display="block"; errorMsg.innerText="Enter Credentials"; return; }
-            
+            if(!email || !password) return;
             auth.signInWithEmailAndPassword(email, password).catch(err => {
-                errorMsg.style.display="block"; errorMsg.innerText="Login Failed!";
+                document.getElementById("loginError").style.display = "block";
+                document.getElementById("loginError").innerText = err.message;
             });
         });
 
         document.getElementById("logoutBtn").addEventListener("click", () => { auth.signOut(); location.reload(); });
 
-        function copyAuthDetails() {
-            const text = `Email: ${document.getElementById("showUserEmail").innerText}\nID: ${document.getElementById("showDeviceId").innerText}`;
-            navigator.clipboard.writeText(text).then(() => alert("Copied!"));
+        let currentAmpm = 'AM';
+        function setAMPM(val) { currentAmpm = val; document.getElementById('btnAM').classList.toggle('active', val==='AM'); document.getElementById('btnPM').classList.toggle('active', val==='PM'); }
+        function checkInput(el, nextId) { if (el.value.length >= 2 && nextId) document.getElementById(nextId).focus(); }
+
+        function calculateSignal() {
+            var odd = parseFloat(document.getElementById("lastOdd").value);
+            var hours = parseInt(document.getElementById("inputHour").value);
+            var minutes = parseInt(document.getElementById("inputMinute").value);
+            if(isNaN(odd) || isNaN(hours)) return;
+
+            if (currentAmpm === 'PM' && hours < 12) hours += 12;
+            if (currentAmpm === 'AM' && hours === 12) hours = 0;
+
+            var date = new Date(); date.setHours(hours, minutes, 0);
+            var signalTime = new Date(date.getTime() + (Math.floor(odd/2) * 60000));
+            
+            const fmt = (d) => d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            document.getElementById("displaySignal").innerText = fmt(signalTime);
+            document.getElementById("zoneStart").innerText = fmt(new Date(signalTime.getTime() - 120000));
+            document.getElementById("zoneEnd").innerText = fmt(new Date(signalTime.getTime() + 120000));
+            document.getElementById("resultArea").style.display = "block";
+        }
+
+        function manualCopy() {
+            const text = `🎯 Signal: ${document.getElementById("displaySignal").innerText}\n🕒 Zone: ${document.getElementById("zoneStart").innerText} - ${document.getElementById("zoneEnd").innerText}`;
+            navigator.clipboard.writeText(text);
+            alert("Copied!");
         }
     </script>
 </body>

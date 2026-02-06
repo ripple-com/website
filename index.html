@@ -154,8 +154,6 @@
         }
         .std-input:focus { border-color: var(--primary); box-shadow: 0 0 15px rgba(0, 242, 255, 0.2); }
         
-        select.std-input { text-align-last: center; }
-
         .btn-analyze { 
             width: 100%; padding: 15px; 
             background: linear-gradient(90deg, var(--secondary), #00c3ff); 
@@ -196,7 +194,6 @@
         .result-panel { background: rgba(0, 242, 255, 0.05); border-radius: 10px; padding: 15px; margin-bottom: 10px; border: 1px solid var(--border); }
         .time-display { font-size: 36px; font-weight: 800; color: var(--primary); text-shadow: 0 0 20px rgba(0, 242, 255, 0.4); margin: 5px 0; font-family: 'Rajdhani', sans-serif; }
         .zone-display { font-size: 20px; color: #ffd700; font-weight: 600; font-family: 'Rajdhani', sans-serif; letter-spacing: 1px;}
-        .btn-copy { width: 100%; padding: 12px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; color: white; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; font-family: 'Rajdhani', sans-serif; letter-spacing: 1px; transition: 0.3s;}
         
         .social-area { margin-top: 25px; padding-top: 15px; border-top: 1px solid rgba(255, 255, 255, 0.1); display: flex; gap: 10px; justify-content: center; }
         .social-btn { flex: 1; display: flex; align-items: center; justify-content: center; padding: 12px; border-radius: 8px; text-decoration: none; color: white; font-size: 13px; font-weight: 600; transition: 0.3s; border: 1px solid transparent; gap: 8px; font-family: 'Poppins', sans-serif; }
@@ -205,11 +202,7 @@
         .tg { background: rgba(0, 136, 204, 0.1); border-color: rgba(0, 136, 204, 0.4); }
         
         .footer { margin-top: 25px; font-size: 10px; color: var(--text-muted); letter-spacing: 0.5px; }
-        .link-text { color: var(--primary); text-decoration: none; font-weight: bold; cursor: pointer; transition: 0.3s; }
-        .link-text:hover { color: white; text-shadow: 0 0 10px var(--primary); }
 
-        input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
-        input[type=number] { -moz-appearance: textfield; }
         @keyframes blink { 50% { opacity: 0; } }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
@@ -246,55 +239,9 @@
             <input type="password" id="password" class="std-input" placeholder="••••••••">
         </div>
         <button class="btn-analyze" id="loginBtn">INITIALIZE SESSION <i class="fa-solid fa-arrow-right"></i></button>
-        <p style="margin-top: 20px; font-size: 12px; color: #8b9bb4;">
-            Don't have an account? <span class="link-text" onclick="showRegister()">REGISTER HERE</span>
-        </p>
+        
         <div id="loginError" class="error-msg"></div>
         <div class="footer">SYSTEM ID: 2.0.4 | POWERED BY SUWAHAS SATHSARA</div>
-    </div>
-
-    <div id="registerScreen" class="tech-card">
-        <div class="profile-wrapper">
-            <img src="suwahas.png" alt="Profile" class="profile-img">
-        </div>
-        <h1>REGISTER</h1>
-        <div class="sub-title">CREATE NEW ACCOUNT</div>
-        
-        <div class="input-box">
-            <label>SELECT BETTING SITE</label>
-            <select id="regSite" class="std-input" style="appearance: none;">
-                <option value="" disabled selected>CHOOSE SITE</option>
-                <option value="1xbet">1XBET</option>
-                <option value="888starz">888STARZ</option>
-                <option value="dbbet">DBBET</option>
-                <option value="wowbet">WOWBET</option>
-                <option value="paripulse">PARIPULSE</option>
-                <option value="coldbet">COLDBET</option>
-            </select>
-        </div>
-
-        <div class="input-box">
-            <label>BETTING ID</label>
-            <input type="text" id="regBetId" class="std-input" placeholder="Enter Site ID">
-        </div>
-
-        <div class="input-box">
-            <label>ENTER EMAIL</label>
-            <input type="email" id="regEmail" class="std-input" placeholder="user@email.com">
-        </div>
-        <div class="input-box">
-            <label>PASSWORD</label>
-            <input type="password" id="regPass" class="std-input" placeholder="••••••••">
-        </div>
-        <div class="input-box">
-            <label>CONFIRM PASSWORD</label>
-            <input type="password" id="regConfirmPass" class="std-input" placeholder="••••••••">
-        </div>
-        <button class="btn-analyze" id="regBtn" onclick="registerUser()">CREATE ACCOUNT <i class="fa-solid fa-check"></i></button>
-        <p style="margin-top: 20px; font-size: 12px; color: #8b9bb4;">
-            Already have an account? <span class="link-text" onclick="showLogin()">LOGIN HERE</span>
-        </p>
-        <div id="regError" class="error-msg"></div>
     </div>
 
     <div id="deviceLockScreen" class="tech-card">
@@ -304,28 +251,25 @@
         <h1>DEVICE LOCK</h1>
         <div class="sub-title">AUTHORIZATION REQUIRED</div>
         <div style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; border: 1px dashed var(--primary); margin-bottom: 20px; text-align: left;">
-            <div style="font-size: 10px; color: #8b9bb4; margin-bottom: 5px; text-transform: uppercase;">Registration Details</div>
-            
+            <div style="font-size: 10px; color: #8b9bb4; margin-bottom: 5px; text-transform: uppercase;">Details</div>
             <div style="font-size: 12px; color: #8b9bb4;">Email:</div>
             <div id="showUserEmail" style="font-size: 14px; color: #fff; font-weight: bold; margin-bottom: 10px;">LOADING...</div>
-            
             <div style="font-size: 12px; color: #8b9bb4;">Device ID:</div>
             <div id="showDeviceId" style="font-size: 14px; color: #fff; font-weight: bold; font-family: 'Rajdhani', sans-serif; letter-spacing: 1px; word-break: break-all;">LOADING...</div>
             
             <button onclick="copyAuthDetails()" style="width: 100%; background: transparent; border: none; color: var(--primary); cursor: pointer; font-size: 12px; margin-top: 15px; padding: 8px; border: 1px solid var(--primary); border-radius: 4px; font-weight: bold;">
-                <i class="fa-regular fa-copy"></i> COPY EMAIL & ID
+                <i class="fa-regular fa-copy"></i> COPY DETAILS
             </button>
         </div>
         <p style="font-size: 12px; color: #ccc; margin-bottom: 20px; line-height: 1.5;">
-            You don't have permission to access this App. Please send these details to Admin via Telegram to approve your device.
+            Please contact Admin via Telegram to approve your device.
         </p>
         <div class="social-area">
-            <a id="sendToAdminBtn" href="#" target="_blank" class="social-btn tg" style="flex: 1; border: 1px solid rgba(0, 136, 204, 0.4);">
+            <a id="sendToAdminBtn" href="#" target="_blank" class="social-btn tg">
                 <i class="fab fa-telegram"></i> SEND TO ADMIN
             </a>
         </div>
         <button class="btn-logout" onclick="auth.signOut(); location.reload();">SIGN OUT</button>
-        <div class="footer">SECURITY ID CHECKER V1.0</div>
     </div>
 
     <div id="mainApp" class="tech-card">
@@ -349,33 +293,24 @@
             <label>SYSTEM TIME INPUT</label>
             <div class="clock-wrapper">
                 <div class="clock-container">
-                    <input type="number" id="inputHour" class="clock-input" placeholder="00" oninput="checkInput(this, 'inputMinute')">
+                    <input type="number" id="inputHour" class="clock-input" placeholder="00">
                     <span class="clock-colon">:</span>
-                    <input type="number" id="inputMinute" class="clock-input" placeholder="00" oninput="checkInput(this, null)">
+                    <input type="number" id="inputMinute" class="clock-input" placeholder="00">
                 </div>
                 <div class="ampm-toggle">
-                    <button class="ampm-btn active" id="btnAM" onclick="setAMPM('AM')">AM</button>
-                    <button class="ampm-btn" id="btnPM" onclick="setAMPM('PM')">PM</button>
+                    <button class="ampm-btn active" id="btnAM">AM</button>
+                    <button class="ampm-btn" id="btnPM">PM</button>
                 </div>
             </div>
         </div>
 
-        <button class="btn-analyze" onclick="calculateSignal()">CALCULATE SIGNAL <i class="fa-solid fa-bolt"></i></button>
+        <button class="btn-analyze">CALCULATE SIGNAL <i class="fa-solid fa-bolt"></i></button>
 
         <div id="resultArea">
             <div class="result-panel">
                 <div style="font-size: 10px; color: #8b9bb4; letter-spacing: 2px; text-transform: uppercase;">Predicted Signal Time</div>
                 <div class="time-display" id="displaySignal">00:00 AM</div>
             </div>
-            <div class="result-panel" style="border-color: #ffd700; background: rgba(255, 215, 0, 0.05);">
-                <div style="font-size: 10px; color: #ffd700; letter-spacing: 2px; text-transform: uppercase;">Active Zone (4 MIN)</div>
-                <div class="zone-display">
-                    <span id="zoneStart">00:00</span> - <span id="zoneEnd">00:00</span>
-                </div>
-            </div>
-            <button class="btn-copy" onclick="manualCopy()" id="copyButton">
-                <i class="fa-regular fa-copy"></i> COPY SIGNAL DATA
-            </button>
         </div>
 
         <div class="social-area">
@@ -388,7 +323,6 @@
         </div>
 
         <button class="btn-logout" id="logoutBtn">TERMINATE SESSION <i class="fa-solid fa-power-off"></i></button>
-        <div class="footer">VERSION 2.5 | SUWAHAS SATHSARA</div>
     </div>
 
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
@@ -410,252 +344,72 @@
         const auth = firebase.auth();
         const db = firebase.firestore();
 
-        // UI Helpers
-        function showRegister() { document.getElementById("loginScreen").style.display = "none"; document.getElementById("registerScreen").style.display = "block"; }
-        function showLogin() { document.getElementById("registerScreen").style.display = "none"; document.getElementById("loginScreen").style.display = "block"; }
-        
-        // Registration Logic with Telegram Notification
-        function registerUser() {
-            const site = document.getElementById("regSite").value;
-            const betId = document.getElementById("regBetId").value;
-            const email = document.getElementById("regEmail").value;
-            const pass = document.getElementById("regPass").value;
-            const confirmPass = document.getElementById("regConfirmPass").value;
-            const btn = document.getElementById("regBtn");
-            const msg = document.getElementById("regError");
-
-            if(!site || !betId || !email || !pass || !confirmPass) { msg.style.display = 'block'; msg.innerText = "Please fill all fields!"; return; }
-            if(pass !== confirmPass) { msg.style.display = 'block'; msg.innerText = "Passwords do not match!"; return; }
-            if(pass.length < 6) { msg.style.display = 'block'; msg.innerText = "Password must be 6+ chars"; return; }
-
-            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> CREATING...'; msg.style.display = 'none';
-
-            auth.createUserWithEmailAndPassword(email, pass).then((cred) => {
-                // Save info to Database
-                return db.collection("users").doc(cred.user.uid).set({
-                    email: email,
-                    bettingSite: site,
-                    bettingId: betId,
-                    createdAt: new Date().toISOString(),
-                    allowed_devices: [],
-                    deviceId: getDeviceId()
-                });
-            }).then(() => {
-                // SEND TO TELEGRAM BOT
-                const botToken = "8044947548:AAFMqhrt2A5qEt-lK92n39_8sJS014i_5U0"; // ENTER YOUR BOT TOKEN HERE
-                const chatId = "6877320092";     // ENTER YOUR CHAT ID HERE
-                const text = `🚀 *NEW USER REGISTERED*\n\n📧 Email: ${email}\n🎮 Site: ${site}\n🆔 Bet ID: ${betId}\n📱 Device: ${getDeviceId()}`;
-                
-                fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(text)}&parse_mode=Markdown`)
-                .finally(() => {
-                    alert("Account Created Successfully!");
-                });
-
-            }).catch((err) => {
-                msg.style.display = 'block'; msg.innerText = err.message; btn.innerHTML = 'CREATE ACCOUNT <i class="fa-solid fa-check"></i>';
-            });
-        }
-
+        // Device ID logic
         function getDeviceId() {
             let deviceId = localStorage.getItem("aviator_device_id");
             if (!deviceId) {
-                deviceId = 'DEV-' + Math.random().toString(36).substr(2, 6).toUpperCase() + '-' + Math.random().toString(36).substr(2, 6).toUpperCase();
+                deviceId = 'DEV-' + Math.random().toString(36).substr(2, 6).toUpperCase();
                 localStorage.setItem("aviator_device_id", deviceId);
             }
             return deviceId;
         }
 
-        function copyAuthDetails() {
-            const email = document.getElementById("showUserEmail").innerText;
-            const id = document.getElementById("showDeviceId").innerText;
-            const textToCopy = `Requesting Access:\nEmail: ${email}\nDevice ID: ${id}`;
-            
-            navigator.clipboard.writeText(textToCopy).then(() => { 
-                alert("Email and ID Copied Successfully!"); 
-            }).catch(() => { 
-                alert("Please manually copy the details."); 
-            });
+        // UI View Logic
+        function showView(id) {
+            document.querySelectorAll('.tech-card').forEach(el => el.style.display = 'none');
+            document.getElementById('noticeModal').style.display = 'none';
+            if(id === 'noticeModal') document.getElementById(id).style.display = 'flex';
+            else if(id) document.getElementById(id).style.display = 'block';
         }
 
-        let expiryTimer = null;
+        function acceptNotice() { showView('mainApp'); }
 
-        function startSessionTimer(expiryDateStr) {
-            if(expiryTimer) clearInterval(expiryTimer);
-            
-            const expiryDiv = document.getElementById("appUserExpiry");
-            const expiryTime = new Date(expiryDateStr).getTime();
-
-            updateTimer();
-            expiryTimer = setInterval(updateTimer, 1000);
-
-            function updateTimer() {
-                const now = new Date().getTime();
-                const distance = expiryTime - now;
-
-                if (distance < 0) {
-                    clearInterval(expiryTimer);
-                    auth.signOut();
-                    alert("⚠️ YOUR TIME HAS EXPIRED!");
-                    window.location.reload();
-                    return;
-                }
-
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                let displayStr = "";
-                if(days > 0) displayStr += days + "d ";
-                if(hours > 0 || days > 0) displayStr += hours + "h ";
-                displayStr += minutes + "m " + seconds + "s";
-
-                expiryDiv.innerHTML = `<i class="fa-solid fa-stopwatch"></i> TIME LEFT: ${displayStr}`;
-                expiryDiv.style.color = distance < 60000 ? "#ff4d4d" : "#00ff88"; 
-            }
-        }
-
-        function showNotice() {
-            document.getElementById("loginScreen").style.display = "none";
-            document.getElementById("registerScreen").style.display = "none";
-            document.getElementById("deviceLockScreen").style.display = "none"; 
-            document.getElementById("mainApp").style.display = "none";
-            document.getElementById("noticeModal").style.display = "flex";
-        }
-
-        function showDeviceLock(currentId, userEmail) {
-            document.getElementById("loginScreen").style.display = "none";
-            document.getElementById("registerScreen").style.display = "none";
-            document.getElementById("mainApp").style.display = "none";
-            document.getElementById("noticeModal").style.display = "none";
-            document.getElementById("deviceLockScreen").style.display = "block";
-            
-            document.getElementById("showDeviceId").innerText = currentId;
-            document.getElementById("showUserEmail").innerText = userEmail;
-
-            const tgMsg = encodeURIComponent(`Hello Admin, Please unlock my device.\nEmail: ${userEmail}\nDevice ID: ${currentId}`);
-            document.getElementById("sendToAdminBtn").href = `https://t.me/suwahassathsara?text=${tgMsg}`;
-        }
-
-        function acceptNotice() {
-            document.getElementById("noticeModal").style.display = "none";
-            document.getElementById("mainApp").style.display = "block";
-        }
-
-        function checkUserAccess(user) {
-            const myDeviceId = getDeviceId();
-            
-            db.collection("users").doc(user.uid).get().then((doc) => {
-                if (doc.exists) {
-                    const data = doc.data();
-                    const emailDiv = document.getElementById("appUserEmail");
-                    emailDiv.innerText = user.email;
-
-                    if (data.allowed_devices && data.allowed_devices.includes(myDeviceId)) {
-                        if (data.expiryDate) {
-                            const today = new Date();
-                            const expiryDate = new Date(data.expiryDate);
-
-                            if (today > expiryDate) {
-                                auth.signOut();
-                                alert("⚠️ Subscription Expired!");
-                                window.location.reload();
-                                return;
-                            } else {
-                                startSessionTimer(data.expiryDate);
-                            }
+        // Auth Listener
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                const myDeviceId = getDeviceId();
+                db.collection("users").doc(user.uid).get().then((doc) => {
+                    if (doc.exists) {
+                        const data = doc.data();
+                        document.getElementById("appUserEmail").innerText = user.email;
+                        
+                        if (data.allowed_devices && data.allowed_devices.includes(myDeviceId)) {
+                            showView('noticeModal');
+                            document.getElementById("appUserExpiry").innerHTML = 'AUTHORIZED';
                         } else {
-                            document.getElementById("appUserExpiry").innerHTML = '<i class="fa-solid fa-infinity"></i> LIFETIME ACCESS';
+                            document.getElementById("showDeviceId").innerText = myDeviceId;
+                            document.getElementById("showUserEmail").innerText = user.email;
+                            const tgMsg = encodeURIComponent(`Hello Admin, Approve my device.\nEmail: ${user.email}\nID: ${myDeviceId}`);
+                            document.getElementById("sendToAdminBtn").href = `https://t.me/suwahassathsara?text=${tgMsg}`;
+                            showView('deviceLockScreen');
                         }
-                        showNotice();
                     } else {
-                        showDeviceLock(myDeviceId, user.email);
+                        showView('deviceLockScreen');
                     }
-                } else {
-                    db.collection("users").doc(user.uid).set({
-                        email: user.email, createdAt: new Date().toISOString(), allowed_devices: [] 
-                    }).then(() => { showDeviceLock(myDeviceId, user.email); });
-                }
-            }).catch((error) => { alert("Database Error: " + error.message); });
-        }
+                });
+            } else {
+                showView('loginScreen');
+            }
+        });
 
+        // Login Action
         document.getElementById("loginBtn").addEventListener("click", () => {
             const email = document.getElementById("email").value;
             const password = document.getElementById("password").value;
             const errorMsg = document.getElementById("loginError");
-            const btn = document.getElementById("loginBtn");
-
-            if(!email || !password) { errorMsg.style.display = "block"; errorMsg.innerText = "⚠️ ENTER CREDENTIALS"; return; }
-            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> CHECKING DB...'; errorMsg.style.display = "none";
             
-            auth.signInWithEmailAndPassword(email, password).catch((error) => {
-                btn.innerHTML = 'INITIALIZE SESSION <i class="fa-solid fa-arrow-right"></i>';
-                errorMsg.style.display = "block"; errorMsg.innerText = "❌ LOGIN FAILED: " + error.code;
+            if(!email || !password) { errorMsg.style.display="block"; errorMsg.innerText="Enter Credentials"; return; }
+            
+            auth.signInWithEmailAndPassword(email, password).catch(err => {
+                errorMsg.style.display="block"; errorMsg.innerText="Login Failed!";
             });
         });
 
-        document.getElementById("logoutBtn").addEventListener("click", () => { auth.signOut(); window.location.reload(); });
+        document.getElementById("logoutBtn").addEventListener("click", () => { auth.signOut(); location.reload(); });
 
-        auth.onAuthStateChanged((user) => {
-            if (user) { checkUserAccess(user); } 
-            else { 
-                document.getElementById("loginScreen").style.display = "block";
-                document.getElementById("registerScreen").style.display = "none";
-                document.getElementById("deviceLockScreen").style.display = "none";
-                document.getElementById("noticeModal").style.display = "none";
-                document.getElementById("mainApp").style.display = "none";
-            }
-        });
-
-        let currentAmpm = 'AM';
-        function setAMPM(val) { currentAmpm = val; document.getElementById('btnAM').className = val === 'AM' ? 'ampm-btn active' : 'ampm-btn'; document.getElementById('btnPM').className = val === 'PM' ? 'ampm-btn active' : 'ampm-btn'; }
-        function checkInput(el, nextId) { if (el.value.length >= 2) { if(nextId) document.getElementById(nextId).focus(); else el.blur(); } }
-        
-        function calculateSignal() {
-            var oddInput = document.getElementById("lastOdd").value;
-            var hhInput = document.getElementById("inputHour").value;
-            var mmInput = document.getElementById("inputMinute").value;
-
-            if (oddInput === "" || hhInput === "" || mmInput === "") { alert("Please enter all details!"); return; }
-
-            var odd = parseFloat(oddInput);
-            var minutesToAdd = Math.floor(odd / 2);
-            var hours = parseInt(hhInput);
-            var minutes = parseInt(mmInput);
-
-            if (currentAmpm === 'PM' && hours < 12) hours = hours + 12;
-            if (currentAmpm === 'AM' && hours === 12) hours = 0;
-
-            var date = new Date(); date.setHours(hours); date.setMinutes(minutes);
-            var signalDate = new Date(date.getTime() + (minutesToAdd * 60000));
-            var startZone = new Date(signalDate.getTime() - (2 * 60000));
-            var endZone = new Date(signalDate.getTime() + (2 * 60000));
-
-            function formatTime(dateObj) {
-                var h = dateObj.getHours(); var m = dateObj.getMinutes().toString().padStart(2, '0');
-                var ampm = h >= 12 ? 'PM' : 'AM'; h = h % 12; h = h ? h : 12;
-                return h + ":" + m + " " + ampm;
-            }
-
-            document.getElementById("displaySignal").innerText = formatTime(signalDate);
-            document.getElementById("zoneStart").innerText = formatTime(startZone);
-            document.getElementById("zoneEnd").innerText = formatTime(endZone);
-            document.getElementById("resultArea").style.display = "block";
-            
-            var btn = document.getElementById("copyButton");
-            btn.innerHTML = '<i class="fa-solid fa-check"></i> SIGNAL READY';
-            btn.style.background = "rgba(0, 242, 255, 0.2)"; btn.style.color = "#00f2ff";
-        }
-
-        function manualCopy() {
-            var signal = document.getElementById("displaySignal").innerText;
-            var start = document.getElementById("zoneStart").innerText;
-            var end = document.getElementById("zoneEnd").innerText;
-            var textToCopy = `🚨 *AVIATOR SIGNAL PRO* 🚨\n\n🎯 Next Odd Time: ${signal}\n🕒 Zone: ${start} To ${end}\n\n🔥 *විනාඩි හතර තුළ Bet කරන්න*`;
-            var textArea = document.createElement("textarea"); textArea.value = textToCopy; textArea.style.position = "fixed"; textArea.style.left = "-9999px";
-            document.body.appendChild(textArea); textArea.select();
-            try { document.execCommand('copy'); alert("Signal Data Copied!"); } catch (err) { alert("Manual Copy Required"); }
-            document.body.removeChild(textArea);
+        function copyAuthDetails() {
+            const text = `Email: ${document.getElementById("showUserEmail").innerText}\nID: ${document.getElementById("showDeviceId").innerText}`;
+            navigator.clipboard.writeText(text).then(() => alert("Copied!"));
         }
     </script>
 </body>
